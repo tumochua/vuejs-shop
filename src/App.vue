@@ -24,11 +24,20 @@ export default {
 
 <style>
 #app {
-  font-family: Avenir, Helvetica, Arial, sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-  text-align: center;
-  color: #2c3e50;
-  margin-top: 60px;
+  font-family: Helvetica Neue, Helvetica, Arial, 文泉驛正黑, WenQuanYi Zen Hei,
+    Hiragino Sans GB, 儷黑 Pro, LiHei Pro, Heiti TC, 微軟正黑體,
+    Microsoft JhengHei UI, Microsoft JhengHei, sans-seri;
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+:root {
+  --white-color: #fff;
+  --black-color: #000;
+  --text-color: #ccc;
+}
+html {
+  font-size: 62.5%;
+  line-height: 16px;
 }
 </style>
