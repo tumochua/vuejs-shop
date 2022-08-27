@@ -14,8 +14,8 @@
 
 <script>
 import LayoutContentVue from "@/layout/LayoutContent.vue";
-import HeaderVue from "@/Header/index.vue";
-import FooterVue from "@/footer/Footer.vue";
+import HeaderVue from "@/container/Header/index.vue";
+import FooterVue from "@/container/footer/Footer.vue";
 import HomeConent from "@/container/Home/index.vue";
 export default {
   name: "HomeVue",

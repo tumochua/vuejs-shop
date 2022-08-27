@@ -1,5 +1,5 @@
 <template>
-  <header>hello header</header>
+  <header class="header-container">hello header</header>
 </template>
 
 <script>
@@ -8,5 +8,5 @@ export default {
 };
 </script>
 
-<style>
+<style scoped lang="scss">
 </style>
