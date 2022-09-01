@@ -24,20 +24,23 @@ export default {
 
 <style>
 #app {
-  font-family: Helvetica Neue, Helvetica, Arial, 文泉驛正黑, WenQuanYi Zen Hei,
-    Hiragino Sans GB, 儷黑 Pro, LiHei Pro, Heiti TC, 微軟正黑體,
-    Microsoft JhengHei UI, Microsoft JhengHei, sans-seri;
-  margin: 0;
-  padding: 0;
-  box-sizing: border-box;
+  font-family: "Roboto", sans-serif;
 }
 :root {
   --white-color: #fff;
   --black-color: #000;
   --text-color: #ccc;
+  --text-size: 1.3rem;
+  --header-height: 120px;
 }
 html {
   font-size: 62.5%;
   line-height: 16px;
+  max-width: 100%;
+}
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
 }
 </style>
