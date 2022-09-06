@@ -25,6 +25,8 @@ export default {
 <style>
 #app {
   font-family: "Roboto", sans-serif;
+
+  height: 500px;
 }
 :root {
   --white-color: #fff;
@@ -36,11 +38,15 @@ export default {
 html {
   font-size: 62.5%;
   line-height: 16px;
-  max-width: 100%;
 }
 * {
   margin: 0;
   padding: 0;
   box-sizing: border-box;
+}
+.grid {
+  width: 1200px;
+  max-width: 100%;
+  margin: 0 auto;
 }
 </style>

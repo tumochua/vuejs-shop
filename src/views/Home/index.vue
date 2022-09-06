@@ -13,10 +13,13 @@
 </template>
 
 <script>
+// import { ref } from "vue";
+
 import LayoutContentVue from "@/layout/LayoutContent.vue";
 import HeaderVue from "@/container/Header/index.vue";
 import FooterVue from "@/container/footer/Footer.vue";
 import HomeConent from "@/container/Home/index.vue";
+
 export default {
   name: "HomeVue",
   components: {
@@ -25,7 +28,12 @@ export default {
     FooterVue,
     HomeConent,
   },
-  setup() {},
+  setup() {
+    // let idRouter = ref("");
+    // idRouter = router;
+    // console.log(idRouter);
+    // return { idRouter };
+  },
 };
 </script>
 
