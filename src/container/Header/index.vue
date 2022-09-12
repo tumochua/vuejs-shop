@@ -100,6 +100,7 @@
                   header-container-top-wapper-item
                   header-boder-after
                 "
+                @click="handleLogin"
               >
                 Đăng Ký
               </li>
@@ -164,6 +165,7 @@
 
 <script>
 import { onMounted, ref, reactive, computed } from "vue";
+import { useRouter } from "vue-router";
 import ModelsVue from "@/components/models/Models.vue";
 export default {
   name: "HomeContent",
@@ -172,6 +174,7 @@ export default {
   },
 
   setup() {
+    const router = useRouter();
     // console.log(props);
     // console.log("check content", context);
     const isLoaded = ref(false);
@@ -225,6 +228,10 @@ export default {
         ? "SHOPEE MART - BÁCH HÓA - 50%"
         : "Đăng ký và nhận voucher bạn mới đến 70k!";
     });
+    const handleLogin = () => {
+      // router.to("/login");
+      router.push({ name: "Login" });
+    };
 
     return {
       isLoaded,
@@ -241,6 +248,7 @@ export default {
       hanldeMouseleaveNotification,
       handlemouseoverCart,
       hanldeMouseleaveCart,
+      handleLogin,
     };
   },
 };
@@ -386,7 +394,7 @@ export default {
             width: 80px;
             top: 14px;
             right: 0px;
-            background-color: violet;
+            // background-color: violet;
           }
           // .header-hover {
           //   &:hover {
