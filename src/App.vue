@@ -34,6 +34,8 @@ export default {
   --text-color: #ccc;
   --text-size: 1.3rem;
   --header-height: 120px;
+  /* btn */
+  --btn-color: #ee4d2d;
 }
 html {
   font-size: 62.5%;
@@ -48,5 +50,38 @@ html {
   width: 1200px;
   max-width: 100%;
   margin: 0 auto;
+}
+/* @keyframes moveInleft {
+  0% {
+    opacity: 0.6;
+    transform: translateX(0px);
+    right: 10px;
+  }
+  100% {
+    opacity: 1;
+    transform: translate(-10px);
+  }
+} */
+/* @keyframes moveInleft {
+  0% {
+    transform: rotate3d(0, 1, 0, 150deg) perspective(400px);
+  }
+  100% {
+    transform: rotate3d(0, 1, 0, 0deg) perspective(400px);
+  }
+} */
+
+@-webkit-keyframes animateright {
+}
+
+@keyframes animateright {
+  0% {
+    transform: translate(-10px);
+    opacity: 0;
+  }
+  100% {
+    transform: translate(0px);
+    opacity: 1;
+  }
 }
 </style>

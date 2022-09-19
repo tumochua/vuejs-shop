@@ -197,7 +197,7 @@ export default {
       { id: 4, name: "Váy" },
       { id: 5, name: "Áo Khoác" },
       { id: 6, name: "Balo" },
-      { id: 7, name: "Quaand Jean Name" },
+      { id: 7, name: "Quần Jean Name" },
       { id: 8, name: "Ốp iPhone" },
       { id: 9, name: "Dép Nam" },
     ]);
