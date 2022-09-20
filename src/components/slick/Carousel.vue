@@ -16,12 +16,24 @@
         :direction="direction"
         @mouseenter="stopSlideTimer"
         @mouseout="startSlideTimer"
+        @onHandleShowHideBtn="onHandleShowHideBtn"
       ></carousel-item>
       <carousel-controls
         v-if="controls"
         @prev="prev"
         @next="next"
+        :showHideBtn="showHideBtn"
       ></carousel-controls>
+    </div>
+    <div class="slick__right">
+      <img
+        src="https://cf.shopee.vn/file/e56e59416406a49ed50580f5fb23aae0_xhdpi"
+        class="slick__right-item"
+      />
+      <img
+        src="https://cf.shopee.vn/file/c2f6aeffe1f87e3728727009f7fc52d4_xhdpi"
+        class="slick__right-item"
+      />
     </div>
   </div>
 </template>
@@ -50,12 +62,20 @@ export default {
       type: Number,
       default: 5000,
     },
+    slideRight: {
+      type: Array,
+      default() {
+        return [];
+      },
+    },
   },
   components: { CarouselItem, CarouselControls, CarouselIndicators },
 
   setup({ slides, interval }) {
+    console.log("check slide", slides);
     const currentSlide = ref(0);
     const slideInterval = ref(0);
+    const showHideBtn = ref(false);
     const direction = ref("right");
     function setCurrentSlide(index) {
       currentSlide.value = index;
@@ -94,6 +114,9 @@ export default {
         prev(step);
       }
     }
+    const onHandleShowHideBtn = () => {
+      showHideBtn.value = true;
+    };
     onMounted(() => {
       startSlideTimer();
     });
@@ -105,6 +128,7 @@ export default {
       currentSlide,
       slideInterval,
       direction,
+      showHideBtn,
       setCurrentSlide,
       prev,
       _next,
@@ -112,20 +136,31 @@ export default {
       startSlideTimer,
       stopSlideTimer,
       switchSlide,
+      onHandleShowHideBtn,
     };
   },
 };
 </script>
 
-<style scoped>
+<style scoped lang="scss">
 .carousel {
-  display: flex;
-  justify-content: center;
-}
-.carousel-inner {
-  position: relative;
-  width: 900px;
-  height: 400px;
-  overflow: hidden;
+  display: grid;
+  grid-template-columns: 2fr 1fr;
+  grid-template-rows: 137px 137px;
+  column-gap: 6px;
+  padding: 5px;
+  .carousel-inner {
+    position: relative;
+    height: 271px;
+    width: 100%;
+    object-fit: contain;
+    overflow: hidden;
+  }
+  .slick__right {
+    .slick__right-item {
+      width: 100%;
+      height: 133px;
+    }
+  }
 }
 </style>
