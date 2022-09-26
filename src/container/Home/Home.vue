@@ -1,22 +1,30 @@
 <template>
-  <div class="grid">
-    <Carousel
-      :slides="slideseft"
-      :interval="2000"
-      controls
-      indicators
-      :slideRight="slideRight"
-    ></Carousel>
+  <div>
+    <HeaderVue></HeaderVue>
+    <div class="grid">
+      <Carousel
+        :slides="slideseft"
+        :interval="3000"
+        controls
+        indicators
+        :slideRight="slideRight"
+      ></Carousel>
+    </div>
+    <FooterVue></FooterVue>
   </div>
 </template>
 
 <script>
 import Carousel from "@/components/slick/Carousel.vue";
+import HeaderVue from "@/container/Header/Header.vue";
+import FooterVue from "@/container/footer/Footer.vue";
 import { reactive } from "vue";
 export default {
-  name: "HomeContent",
+  name: "HomeVue",
   components: {
     Carousel,
+    HeaderVue,
+    FooterVue,
   },
   setup() {
     const slideseft = reactive([

@@ -19,9 +19,9 @@ export default {
       type: String,
     },
     value: {
-      type: Object,
+      type: String,
       default() {
-        return {};
+        return "";
       },
     },
     name: {
@@ -55,5 +55,6 @@ export default {
   border: 1px solid rgba(0, 0, 0, 0.14);
   border-radius: 2px;
   box-shadow: rgba 0 2px 0 (0 0 0/2%);
+  width: 100%;
 }
 </style> 

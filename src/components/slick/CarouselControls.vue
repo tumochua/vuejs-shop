@@ -1,6 +1,6 @@
 <template>
   <!-- in vue 2.x you need wrap these buttons in a div -->
-  <div v-if="showHideBtn">
+  <div>
     <button class="carousel-control left" @click="$emit('prev')">
       <i class="fa-solid fa-circle-arrow-left carousel__icon"></i>
     </button>
@@ -14,12 +14,12 @@
 export default {
   emits: ["prev", "next"], // vue v3
   props: {
-    showHideBtn: {
-      type: Boolean,
-      default() {
-        return false;
-      },
-    },
+    // showHideBtn: {
+    //   type: Boolean,
+    //   default() {
+    //     return false;
+    //   },
+    // },
   },
   setup() {},
 };

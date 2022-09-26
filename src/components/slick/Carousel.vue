@@ -16,13 +16,11 @@
         :direction="direction"
         @mouseenter="stopSlideTimer"
         @mouseout="startSlideTimer"
-        @onHandleShowHideBtn="onHandleShowHideBtn"
       ></carousel-item>
       <carousel-controls
         v-if="controls"
         @prev="prev"
         @next="next"
-        :showHideBtn="showHideBtn"
       ></carousel-controls>
     </div>
     <div class="slick__right">
@@ -72,7 +70,6 @@ export default {
   components: { CarouselItem, CarouselControls, CarouselIndicators },
 
   setup({ slides, interval }) {
-    console.log("check slide", slides);
     const currentSlide = ref(0);
     const slideInterval = ref(0);
     const showHideBtn = ref(false);
@@ -114,9 +111,7 @@ export default {
         prev(step);
       }
     }
-    const onHandleShowHideBtn = () => {
-      showHideBtn.value = true;
-    };
+
     onMounted(() => {
       startSlideTimer();
     });
@@ -136,7 +131,6 @@ export default {
       startSlideTimer,
       stopSlideTimer,
       switchSlide,
-      onHandleShowHideBtn,
     };
   },
 };
