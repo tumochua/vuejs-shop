@@ -13,13 +13,13 @@ export default {
       type: Number,
       required: true,
       default() {
-        return 12;
+        return 1.2;
       },
     },
   },
   setup({ fontSize }) {
     const handleStyle = reactive({
-      fontSize: fontSize + "px",
+      fontSize: fontSize + "rem",
       //   fontSize: "20px",
       //   fontSize: fontSize + "px",
     });

@@ -96,4 +96,27 @@ html {
     opacity: 1;
   }
 }
+@keyframes logo {
+  0% {
+    /* opacity: 1; */
+  }
+
+  30% {
+    /* opacity: 0.2; */
+    fill: violet;
+  }
+
+  60% {
+    /* opacity: 0.3; */
+    fill: aqua;
+  }
+  90% {
+    /* opacity: 0.4; */
+    fill: darkorange;
+  }
+  100% {
+    /* opacity: 0.5; */
+    fill: var(--colers);
+  }
+}
 </style>

@@ -104,7 +104,10 @@
               >
                 Đăng Ký
               </li>
-              <li class="header-right-icons header-container-top-wapper-item">
+              <li
+                class="header-right-icons header-container-top-wapper-item"
+                @click="hanldeRouteLogin"
+              >
                 Đăng Nhập
               </li>
             </ul>
@@ -234,6 +237,9 @@ export default {
       // router.to("/login");
       router.push({ name: "Register" });
     };
+    const hanldeRouteLogin = () => {
+      router.push({ name: "Login" });
+    };
 
     return {
       isLoaded,
@@ -251,6 +257,7 @@ export default {
       handlemouseoverCart,
       hanldeMouseleaveCart,
       handleLogin,
+      hanldeRouteLogin,
     };
   },
 };

@@ -1,22 +1,21 @@
 <template>
   <div>
     <HeaderAuthVue></HeaderAuthVue>
-    <Register class="register__wapper"></Register>
-    <FooTerVue></FooTerVue>
+    <LoginAuthVue class="register__wapper"></LoginAuthVue>
+    <FooterVue></FooterVue>
   </div>
 </template>
 
 <script>
-import Register from "@/container/auth/Register.vue";
-// import HeaderAuth from "@container/auth/HeaderAuth.vue";
 import HeaderAuthVue from "@/container/auth/HeaderAuth.vue";
-import FooTerVue from "@/container/footer/Footer.vue";
+import LoginAuthVue from "@/container/auth/Login.vue";
+import FooterVue from "@/container/footer/Footer.vue";
 export default {
-  name: "RegisterVue",
+  name: "LoginVue",
   components: {
-    Register,
+    LoginAuthVue,
     HeaderAuthVue,
-    FooTerVue,
+    FooterVue,
   },
 };
 </script>
