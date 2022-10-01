@@ -6,6 +6,9 @@
       :value="value"
       @input="onChangeValue"
       :type="type"
+      :class="{
+        'error-border': errorInput,
+      }"
     />
   </div>
 </template>
@@ -19,9 +22,9 @@ export default {
       type: String,
     },
     value: {
-      type: Object,
+      type: String,
       default() {
-        return {};
+        return "";
       },
     },
     name: {
@@ -36,13 +39,22 @@ export default {
         return "text";
       },
     },
+    errorInput: {
+      type: Boolean,
+    },
+    // showHidlePasworld: {
+    //   type: Boolean,
+    // },
   },
   setup({ name }, { emit }) {
     const onChangeValue = (e) => {
       // emit("onChangeValue");
       emit("onChangeValue", { name: name, value: e.target.value });
     };
-    return { onChangeValue };
+    return {
+      onChangeValue,
+    };
+    // HandleShoHidePasworld,
   },
 };
 </script>
@@ -55,5 +67,22 @@ export default {
   border: 1px solid rgba(0, 0, 0, 0.14);
   border-radius: 2px;
   box-shadow: rgba 0 2px 0 (0 0 0/2%);
+  width: 100%;
+}
+.error-border {
+  border: 1px solid var(--colers);
+}
+.input__wapper {
+  // position: relative;
+
+  // .login__pasworld-icon {
+  //   position: absolute;
+  //   right: 0;
+  //   top: 50%;
+  //   transform: translate(-50%, -50%);
+  //   cursor: pointer;
+  //   width: 20px;
+  //   cursor: pointer;
+  // }
 }
 </style> 

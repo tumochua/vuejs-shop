@@ -8,7 +8,7 @@
 
 <script>
 import router from "@/router";
-import HeaderVue from "@/container/Header/index.vue";
+import HeaderVue from "@/container/Header/Header.vue";
 import FooterVue from "@/container/footer/Footer.vue";
 export default {
   name: "DetailVue",

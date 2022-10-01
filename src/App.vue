@@ -1,5 +1,8 @@
 <template>
   <div id="app">
+    <!-- <HeaderVue></HeaderVue>
+    <HomeVue></HomeVue>
+    <FooterVue></FooterVue> -->
     <router-view> </router-view>
   </div>
 </template>
@@ -8,8 +11,16 @@
 import { db } from "./configs/firebase.js";
 import { getDocs, collection } from "firebase/firestore";
 import { reactive } from "vue";
+// import HeaderVue from "@/container/Header/index.vue";
+// import FooterVue from "@/container/footer/Footer.vue";
+// import HomeVue from "@/container/Home/index.vue";
 export default {
   name: "AppVue",
+  components: {
+    // HeaderVue,
+    // FooterVue,
+    // HomeVue,
+  },
   setup() {},
   async created() {
     const querySnapshot = await getDocs(collection(db, "transections"));
@@ -36,6 +47,7 @@ export default {
   --header-height: 120px;
   /* btn */
   --btn-color: #ee4d2d;
+  --colers: #ee4d2d;
 }
 html {
   font-size: 62.5%;
@@ -82,6 +94,29 @@ html {
   100% {
     transform: translate(0px);
     opacity: 1;
+  }
+}
+@keyframes logo {
+  0% {
+    /* opacity: 1; */
+  }
+
+  30% {
+    /* opacity: 0.2; */
+    fill: violet;
+  }
+
+  60% {
+    /* opacity: 0.3; */
+    fill: aqua;
+  }
+  90% {
+    /* opacity: 0.4; */
+    fill: darkorange;
+  }
+  100% {
+    /* opacity: 0.5; */
+    fill: var(--colers);
   }
 }
 </style>

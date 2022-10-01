@@ -37,5 +37,6 @@ export default {
 }
 .active {
   opacity: 1;
+  background: var(--colers);
 }
 </style>

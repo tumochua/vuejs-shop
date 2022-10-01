@@ -5,7 +5,6 @@
       v-show="currentSlide === index"
       @mouseenter="$emit('mouseenter')"
       @mouseout="$emit('mouseout')"
-      @mouseover="handleShowHideBtn"
     >
       <img :src="slide" />
     </div>
@@ -15,16 +14,14 @@
 <script>
 import { computed } from "vue";
 export default {
-  emits: ["mouseenter", "mouseout", "onHandleShowHideBtn"],
+  emits: ["mouseenter", "mouseout"],
   props: ["slide", "currentSlide", "index", "direction"],
-  setup({ direction }, { emit }) {
+  setup({ direction }) {
     const transitionEffect = computed(() => {
       return direction === "right" ? "slide-out" : "slide-in";
     });
-    const handleShowHideBtn = () => {
-      emit("onHandleShowHideBtn");
-    };
-    return { transitionEffect, handleShowHideBtn };
+
+    return { transitionEffect };
   },
 };
 </script>
