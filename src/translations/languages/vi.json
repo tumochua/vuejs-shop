@@ -1,0 +1,38 @@
+{
+  "Header": {
+    "Seller-Channel": "Kênh Người Bán",
+    "Become-a-ShopeeSeller": "Trở thành Người bán Shopee",
+    "Get-the-app": "Tải ứng dụng",
+    "Connection": "Kết nối",
+    "Notify": "Thông Báo",
+    "Support": "Hỗ Trợ",
+    "Language": " Tiếng Việt ",
+    "Register": "Đăng Ký",
+    "Log-in": "Đăng Nhập",
+
+    "Coat": "Áo Khoác",
+    "Sandal": "Dép",
+    "Women-Book-Bags": "Túi Sách Nữ",
+    "Skirt": "Váy",
+    "Crop-top-shirt": "Áo Croptop",
+    "iPhone-Cases": "Ốp iPhone",
+    "Bluetooth-headphone": "Tai Nghe Bluetooth",
+    "Rice-cake": "Bánh Tráng Phơi Sương"
+  },
+  "auth": {
+    "Log-in": "Đăng Nhập",
+    "You-need-help": "Bạn Cần Giúp Đỡ ?",
+    "Register": "Đăng Ký",
+    "Forgot-password": "Quên mật khẩu",
+    "And": "Hoặc",
+    "New-to-Shopee": "Bạn mới biết đến Shopee?",
+    "description": "Bằng việc đăng kí, bạn đã đồng ý với Shopee về",
+    "Terms-of-Service": "Điều khoản dịch vụ",
+    "Privacy-Policy": "Chính sách bảo mật",
+    "account": "Bạn đã có tài khoản?",
+    "placeholder": {
+      "email": "Email",
+      "password": "Mật Khẩu"
+    }
+  }
+}

@@ -6,13 +6,14 @@
           <div class="header-container-top-ctn">
             <ul class="header-container-top-wapper">
               <li class="header-container-top-wapper-item header-boder-after">
-                Kênh Người Bán
+                {{ $t("Header.Seller-Channel") }}
               </li>
               <li class="header-container-top-wapper-item header-boder-after">
-                Trở thành Người bán Shopee
+                {{ $t("Header.Become-a-ShopeeSeller") }}
               </li>
               <li class="header-container-top-wapper-item handle-model">
-                Tải ứng dụng
+                {{ $t("Header.Get-the-app") }}
+
                 <div class="model-download">
                   <div>
                     <img
@@ -43,7 +44,8 @@
                   header-boder-before
                 "
               >
-                Kết nối
+                {{ $t("Header.Connection") }}
+
                 <i class="fa-brands fa-facebook header-left-icons"></i>
                 <i class="fa-brands fa-instagram header-left-icons"></i>
               </li>
@@ -59,7 +61,7 @@
                 @mouseleave="hanldeMouseleaveNotification"
               >
                 <i class="header-right-icons fa-regular fa-bell"></i>
-                Thông Báo
+                {{ $t("Header.Notify") }}
                 <span>
                   <models-vue
                     v-if="isShowBell"
@@ -71,7 +73,7 @@
               </li>
               <li class="header-right-icons header-container-top-wapper-item">
                 <i class="header-right-icons fa-solid fa-circle-question"></i>
-                Hỗ Trợ
+                {{ $t("Header.Support") }}
               </li>
               <li
                 class="
@@ -83,7 +85,8 @@
                 @mouseleave="hanldeMouseleaveLangue"
               >
                 <i class="header-right-icons fa-solid fa-globe"></i>
-                Tiếng Việt
+                {{ $t("Header.Language") }}
+
                 <i class="header-right-icon fa-solid fa-caret-down"></i>
                 <span>
                   <models-vue
@@ -102,13 +105,19 @@
                 "
                 @click="handleLogin"
               >
-                Đăng Ký
+                {{ $t("Header.Register") }}
               </li>
               <li
                 class="header-right-icons header-container-top-wapper-item"
                 @click="hanldeRouteLogin"
               >
-                Đăng Nhập
+                {{ $t("Header.Log-in") }}
+              </li>
+              <li
+                style="margin-left: 10px; cursor: pointer"
+                @click="handleLanguage()"
+              >
+                Language
               </li>
             </ul>
           </div>
@@ -161,7 +170,11 @@
           :key="category.id"
           class="header__category--item"
         >
-          <span>{{ category.name }}</span>
+          <span>
+            <!-- {{name }} -->
+            <!-- {{ category.name }} -->
+            {{ $t(category.name) }}
+          </span>
         </div>
       </div>
     </div>
@@ -171,6 +184,7 @@
 <script>
 import { onMounted, ref, reactive, computed } from "vue";
 import { useRouter } from "vue-router";
+import { useStore } from "vuex";
 import ModelsVue from "@/components/models/Models.vue";
 export default {
   name: "HomeContent",
@@ -180,6 +194,7 @@ export default {
 
   setup() {
     const router = useRouter();
+    const store = useStore();
     // console.log(props);
     // console.log("check content", context);
     const isLoaded = ref(false);
@@ -196,15 +211,15 @@ export default {
       baseModel: true,
     });
     const categorys = reactive([
-      { id: 1, name: "Áo Khoác" },
-      { id: 2, name: "Dép" },
-      { id: 3, name: "Túi Sách Nữ" },
-      { id: 4, name: "Váy" },
-      { id: 5, name: "Áo Khoác" },
-      { id: 6, name: "Balo" },
-      { id: 7, name: "Quần Jean Name" },
-      { id: 8, name: "Ốp iPhone" },
-      { id: 9, name: "Dép Nam" },
+      { id: 1, name: "Header.Coat" },
+      { id: 2, name: "Header.Women-Book-Bags" },
+      { id: 3, name: "Header.Skirt" },
+      { id: 4, name: "Header.Crop-top-shirt" },
+      { id: 5, name: "Header.iPhone-Cases" },
+      { id: 6, name: "Header.Bluetooth-headphone" },
+      { id: 7, name: "Header.Rice-cake" },
+      // { id: 8, name: "Header.Coat"},
+      // { id: 9,  name: "Header.Coat" },
     ]);
 
     onMounted(() => {
@@ -240,6 +255,14 @@ export default {
     const hanldeRouteLogin = () => {
       router.push({ name: "Login" });
     };
+    const handeleGetLanguge = computed(() => {
+      return store.getters["getLanguge"];
+    });
+    const handleLanguage = () => {
+      // console.log(language);
+      // localStorage.setItem("language", language);
+      store.dispatch("handleLanguage");
+    };
 
     return {
       isLoaded,
@@ -258,6 +281,8 @@ export default {
       hanldeMouseleaveCart,
       handleLogin,
       hanldeRouteLogin,
+      handleLanguage,
+      handeleGetLanguge,
     };
   },
 };

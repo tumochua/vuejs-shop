@@ -1,0 +1,38 @@
+{
+  "Header": {
+    "Notify": "Notify",
+    "Seller-Channel": "Seller Channel",
+    "Become-a-ShopeeSeller": "Become a ShopeeSeller",
+    "Get-the-app": "Get the app",
+    "Connection": "Connection",
+    "Support": "Support",
+    "Language": "Language",
+    "Register": "Register",
+    "Log-in": "Log in",
+
+    "Coat": "Coat",
+    "Sandal": "Sandal",
+    "Women-Book-Bags": "Women's Book Bags",
+    "Skirt": "Skirt",
+    "Crop-top-shirt": "Crop-top shirt",
+    "iPhone-Cases": "iPhone Cases",
+    "Bluetooth-headphone": "Bluetooth headphone",
+    "Rice-cake": "Rice cake"
+  },
+  "auth": {
+    "Log-in": "Log in",
+    "You-need-help": "You need help ?",
+    "Register": "Register",
+    "Forgot-password": "Forgot password",
+    "And": "And",
+    "New-to-Shopee": "New-to-Shopee?",
+    "description": "By registering, you agree to Shopee about",
+    "Terms-of-Service": "Terms of Service",
+    "Privacy-Policy": "Privacy Policy",
+    "account": "Do you already have an account?",
+    "placeholder": {
+      "email": "Email",
+      "password": "password"
+    }
+  }
+}

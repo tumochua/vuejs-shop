@@ -9,12 +9,12 @@
       <div class="register__infomation-content--right">
         <form>
           <div>
-            <LabelVue :fontSize="2" class="register__infomation-form-title"
-              >Đăng Ký</LabelVue
+            <LabelVue :fontSize="2" class="register__infomation-form-title">
+              {{ $t("auth.Register") }} </LabelVue
             ><br />
             <div class="register__infomation-form--body">
               <InputVue
-                placeholder="Email/Số điện thoại/Tên đăng nhập"
+                :placeholder="$t('auth.placeholder.email')"
                 @onChangeValue="handleInput"
                 name="email"
                 :value="informationUses.email"
@@ -26,23 +26,28 @@
                 :BtnTextColor="true"
                 :fontSize="1.6"
                 class="register__buuton"
-                >ĐĂNG KÝ</ButtonVue
               >
+                {{ $t("auth.Register") }}
+              </ButtonVue>
               <span class="line">
-                <TextVue>HOẶC</TextVue>
+                <TextVue> {{ $t("auth.And") }}</TextVue>
               </span>
               <span class="register__infomation-auth">
                 <FaceBookVue></FaceBookVue>
                 <GoogleVue></GoogleVue>
               </span>
               <SpanVue :fontSize="1.2">
-                Bằng việc đăng kí, bạn đã đồng ý với Shopee về <br />
-                <span class="resigter__nav">Điều khoản dịch vụ &</span>
-                <span class="resigter__nav">Chính sách bảo mật</span>
+                {{ $t("auth.description") }}<br />
+                <span class="resigter__nav"
+                  >{{ $t("auth.Terms-of-Service") }} &
+                </span>
+                <span class="resigter__nav"
+                  >{{ $t("auth.Privacy-Policy") }}
+                </span>
               </SpanVue>
               <TextVue>
-                Bạn đã có tài khoản?
-                <span class="resigter__nav">Đăng nhập</span>
+                {{ $t("auth.account") }}
+                <span class="resigter__nav"> {{ $t("auth.Log-in") }}</span>
               </TextVue>
             </div>
           </div>

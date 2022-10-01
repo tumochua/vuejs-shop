@@ -3,8 +3,9 @@ import App from "./App.vue";
 import store from "./store/index";
 import router from "./router";
 import provideVue from "./provide/index.js";
-
+import i18n from "./translations/i18n.js";
 const app = createApp(App);
+app.use(i18n);
 app.use(router);
 app.use(store);
 app.provide("storeProvide", provideVue);

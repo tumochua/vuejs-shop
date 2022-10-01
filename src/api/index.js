@@ -14,4 +14,7 @@ const getHome = () => {
 const handleApiRegister = (inforUse) => {
   return api.post("/register", inforUse);
 };
-export { getHome, handleApiRegister };
+const handleLogin = (user) => {
+  return api.post("/login", user);
+};
+export { getHome, handleApiRegister, handleLogin };

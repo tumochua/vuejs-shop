@@ -6,28 +6,14 @@
       :value="value"
       @input="onChangeValue"
       :type="type"
-      ref="refPasworld"
+      :class="{
+        'error-border': errorInput,
+      }"
     />
-    <!-- <span class="input__wapper"> -->
-
-    <!-- <span v-if="showHidlePasworld">
-        <i
-          v-show="showPasworld"
-          class="fa-solid fa-eye-slash login__pasworld-icon"
-          @click="HandleShoHidePasworld"
-        ></i>
-        <i
-          v-show="hidePasworld"
-          class="fa-solid fa-eye login__pasworld-icon"
-          @click="HandleShoHidePasworld"
-        ></i
-      ></span> -->
-    <!-- </span> -->
   </div>
 </template>
 
 <script>
-import { ref } from "vue";
 export default {
   name: "InputVue",
   components: {},
@@ -53,28 +39,19 @@ export default {
         return "text";
       },
     },
+    errorInput: {
+      type: Boolean,
+    },
     // showHidlePasworld: {
     //   type: Boolean,
     // },
   },
   setup({ name }, { emit }) {
-    const showPasworld = ref(true);
-    const hidePasworld = ref(false);
-    const refPasworld = ref(null);
     const onChangeValue = (e) => {
       // emit("onChangeValue");
       emit("onChangeValue", { name: name, value: e.target.value });
     };
-    // const HandleShoHidePasworld = () => {
-    //   hidePasworld.value = !hidePasworld.value;
-    //   showPasworld.value = !showPasworld.value;
-
-    //   emit("onChanShowHidePasworld");
-    // };
     return {
-      showPasworld,
-      hidePasworld,
-      refPasworld,
       onChangeValue,
     };
     // HandleShoHidePasworld,
@@ -91,6 +68,9 @@ export default {
   border-radius: 2px;
   box-shadow: rgba 0 2px 0 (0 0 0/2%);
   width: 100%;
+}
+.error-border {
+  border: 1px solid var(--colers);
 }
 .input__wapper {
   // position: relative;

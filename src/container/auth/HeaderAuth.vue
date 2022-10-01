@@ -18,10 +18,10 @@
           ></path>
         </g>
       </svg>
-      <h1 class="header__au-left--resgister">Đăng Ký</h1>
+      <h1 class="header__au-left--resgister">{{ $t("auth.Log-in") }}</h1>
     </span>
-    <TextVue :fontSize="1.4" class="header__auth-help"
-      >Bạn cần giúp đỡ?</TextVue
+    <TextVue :fontSize="1.4" class="header__auth-help">
+      {{ $t("auth.You-need-help") }}</TextVue
     >
   </div>
 </template>
