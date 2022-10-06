@@ -20,6 +20,13 @@
                 :value="informationUses.email"
                 class="register__input"
               ></InputVue>
+              <InputVue
+                :placeholder="$t('auth.placeholder.password')"
+                @onChangeValue="handleInput"
+                name="password"
+                :value="informationUses.password"
+                class="register__input"
+              ></InputVue>
               <ButtonVue
                 @onClickEvent="handleRegister"
                 :padding="10"
@@ -58,9 +65,9 @@
 </template>
 
 <script>
-import Cookies from "js-cookie";
-import { reactive } from "vue";
-import { handleApiRegister } from "@/api/index.js";
+// import Cookies from "js-cookie";
+// import { reactive } from "vue";
+// import { handleApiRegister } from "@/api/index.js";
 import ButtonVue from "@/components/button/Button.vue";
 import InputVue from "@/components/input/Input.vue";
 import LabelVue from "@/components/label/Lable.vue";
@@ -68,6 +75,7 @@ import FaceBookVue from "@/components/auth/FaceBook.vue";
 import TextVue from "@/components/text/Text.vue";
 import GoogleVue from "@/components/auth/Google.vue";
 import SpanVue from "@/components/span/Span.vue";
+import { handleValidateForm } from "@/helper/constants";
 export default {
   name: "RegisterVue",
   components: {
@@ -79,31 +87,56 @@ export default {
     TextVue,
     SpanVue,
   },
-  setup() {
-    const informationUses = reactive({
-      firstName: "",
-      middleName: "",
-      lastName: "",
-      mobile: "",
-      email: "",
-      password: "",
-    });
-
-    const handleRegister = async () => {
-      try {
-        let data = await handleApiRegister(informationUses);
-        console.log(data);
-        // localStorage.setItem("token", data.data.token);
-        Cookies.set("token", data.data.token);
-      } catch (error) {
-        console.log(error);
-      }
-    };
+  props: {
+    informationUses: {
+      type: Object,
+      required: true,
+      default() {
+        return {};
+      },
+    },
+  },
+  setup({ informationUses }, { emit }) {
     const handleInput = (data) => {
-      informationUses[data.name] = data.value;
+      emit("handleInput", data);
+      // console.log( informationUses[data.name] = data.value);
+      // informationUses[data.name] = data.value;
+    };
+    // watch(informationUses, () => {
+    //   console.log("change props");
+    // });
+
+    const handleRegister = () => {
+      console.log(informationUses);
+      emit("handleRegister");
     };
 
-    return { informationUses, handleRegister, handleInput };
+    return { handleRegister, handleInput, handleValidateForm };
+    // const informationUses = reactive({
+    //   firstName: "",
+    //   middleName: "",
+    //   lastName: "",
+    //   mobile: "",
+    //   email: "",
+    //   password: "",
+    // });
+
+    // const handleRegister = async () => {
+    //   try {
+    //     let data = await handleApiRegister(informationUses);
+    //     console.log(data);
+    //   } catch (error) {
+    //     console.log(error);
+    //   }
+    // };
+    // const handleInput = (data) => {
+    //   informationUses[data.name] = data.value;
+    // };
+    // const handleInput = (data) => {
+    //   informationUses[data.name] = data.value;
+    // };
+
+    // return { informationUses, handleRegister, handleInput };
   },
 };
 </script>

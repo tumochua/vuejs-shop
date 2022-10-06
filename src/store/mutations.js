@@ -11,6 +11,12 @@ const mutations = {
         : (state.language = "vi");
     i18n.global.locale = result;
   },
+  handleAuthLogin(state, payload) {
+    state.users = payload;
+  },
+  handleSetUserError(state, payload) {
+    state.userError = payload;
+  },
 };
 
 export default mutations;

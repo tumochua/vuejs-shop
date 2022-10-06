@@ -18,7 +18,7 @@
 import Carousel from "@/components/slick/Carousel.vue";
 import HeaderVue from "@/container/Header/Header.vue";
 import FooterVue from "@/container/footer/Footer.vue";
-import { reactive } from "vue";
+import { reactive, onMounted } from "vue";
 export default {
   name: "HomeVue",
   components: {
@@ -46,6 +46,11 @@ export default {
         img: "https://cf.shopee.vn/file/c2f6aeffe1f87e3728727009f7fc52d4_xhdpi",
       },
     ]);
+
+    onMounted(() => {
+      // console.log("onMounted home");
+    });
+
     return { slideseft, slideRight };
   },
 };

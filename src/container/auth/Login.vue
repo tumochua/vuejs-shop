@@ -62,7 +62,7 @@
                   :BtnTextColor="true"
                   :fontSize="1.6"
                   class="register__buuton"
-                  @click="handleLogin"
+                  @click="handleAuthLogin"
                 >
                   {{ $t("auth.Log-in") }}</ButtonVue
                 >
@@ -89,7 +89,7 @@
   
   <script>
 // import Cookies from "js-cookie";
-import { ref, reactive, computed } from "vue";
+import { ref, reactive, computed, onMounted, onUpdated } from "vue";
 // import { handleApiRegister } from "@/api/index.js";
 import ButtonVue from "@/components/button/Button.vue";
 import InputVue from "@/components/input/Input.vue";
@@ -103,6 +103,8 @@ import {
   handleValidateEmail,
   handleValidatePassword,
 } from "../../helper/constants.js";
+import { useStore } from "vuex";
+// import {handleLogin} from '../../api/index'
 
 export default {
   name: "LoginAuthVue",
@@ -121,6 +123,7 @@ export default {
       email: "",
       password: "",
     });
+    const store = useStore();
     const refPassworld = ref(true);
     // const errorInput = ref(true);
     // const errorMessage = ref(true);
@@ -128,7 +131,7 @@ export default {
       resultEmail: {},
       resultPassword: {},
     });
-    const handleLogin = () => {
+    const handleAuthLogin = () => {
       result.resultEmail = handleValidateEmail({
         email: informationUses.email,
         name: "email",
@@ -142,11 +145,15 @@ export default {
       if (email && password) {
         result.resultEmail.isError = false;
         result.resultPassword.isError = false;
-        console.log("next");
+        // handleLogin()
+        store.dispatch("handleAuthLogin", informationUses);
       } else {
         console.log("orror");
       }
     };
+    const handleGetUsers = computed(() => {
+      return store.getters["getUsers"];
+    });
     const handleInput = (data) => {
       // if (result.resultEmail.name === "email") {
       //   result.resultEmail.isError = false;
@@ -163,6 +170,13 @@ export default {
     const HandleShoHidePasworld = () => {
       refPassworld.value = !refPassworld.value;
     };
+    onMounted(() => {
+      console.log("onMounted login");
+    });
+    onUpdated(() => {
+      // console.log("onUpdated");
+      // console.log(store.state);
+    });
 
     return {
       informationUses,
@@ -173,8 +187,9 @@ export default {
       handleValidateEmail,
       handleInput,
       HandleShoHidePasworld,
-      handleLogin,
+      handleAuthLogin,
       hadleInputPassworld,
+      handleGetUsers,
     };
   },
 };

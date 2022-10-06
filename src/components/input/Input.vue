@@ -42,14 +42,23 @@ export default {
     errorInput: {
       type: Boolean,
     },
+    require: {
+      type: Boolean,
+      default() {
+        return false;
+      },
+    },
     // showHidlePasworld: {
     //   type: Boolean,
     // },
   },
-  setup({ name }, { emit }) {
+  setup({ name, require }, { emit }) {
     const onChangeValue = (e) => {
-      // emit("onChangeValue");
+      if (require) {
+        // console.log("require");
+      }
       emit("onChangeValue", { name: name, value: e.target.value });
+      // emit("onChangeValue");
     };
     return {
       onChangeValue,

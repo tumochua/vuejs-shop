@@ -1,5 +1,7 @@
 const state = {
   couter: 10,
-  language: "en",
+  language: "vi",
+  users: null,
+  userError: null,
 };
 export default state;

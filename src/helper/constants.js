@@ -76,8 +76,18 @@ const handleValidatePassword = ({ password }) => {
 //   }
 // };
 
+const handleValidateForm = (data, name) => {
+  if (name === "password") {
+    if (data < 6) {
+      console.log("err");
+      return "Mật khẩu phải Hơn 6 ký tự";
+    }
+  }
+};
+
 module.exports = {
   handleValidateEmail,
   handleValidatePassword,
+  handleValidateForm,
   // handleValidationForm,
 };

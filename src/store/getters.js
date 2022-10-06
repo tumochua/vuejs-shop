@@ -5,6 +5,9 @@ const getters = {
   getLanguge(state) {
     return state.language;
   },
+  getUsers(state) {
+    return state.users;
+  },
 };
 
 export default getters;

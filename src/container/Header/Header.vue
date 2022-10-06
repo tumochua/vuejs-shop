@@ -57,14 +57,13 @@
                 class="
                   header-container-top-wapper-item header__navbar-item--has-noti
                 "
-                @mouseover="handleMouseoverNotification"
+                @mouseover.self="handleMouseoverNotification"
                 @mouseleave="hanldeMouseleaveNotification"
               >
                 <i class="header-right-icons fa-regular fa-bell"></i>
                 {{ $t("Header.Notify") }}
-                <span>
+                <span v-if="isShowBell">
                   <models-vue
-                    v-if="isShowBell"
                     :afterBorder="true"
                     :customModel="customModel"
                     :width="444"
@@ -81,21 +80,30 @@
                   header-container-top-wapper-item
                   header__navbar-item--has-noti
                 "
-                @mouseover="handleMouseoverLanguage"
-                @mouseleave="hanldeMouseleaveLangue"
               >
-                <i class="header-right-icons fa-solid fa-globe"></i>
-                {{ $t("Header.Language") }}
+                <!-- <i class="header-right-icons fa-solid fa-globe"></i> -->
+                <div class="header_select--language" @click="handleLanguage">
+                  Tiếng Việt
+                  <!-- <li value="vi" class="header__option-language">Tiếng Việt</li> -->
+                  <p
+                    v-if="selectLanguage"
+                    value="en"
+                    class="header__option-language"
+                  >
+                    Tiếng Anh
+                  </p>
+                </div>
+                <!-- {{ $t("Header.Language") }} -->
 
-                <i class="header-right-icon fa-solid fa-caret-down"></i>
-                <span>
+                <!-- <i class="header-right-icon fa-solid fa-caret-down"></i> -->
+                <!-- <span>
                   <models-vue
                     v-if="isShowLanguage"
                     :afterBorder="true"
                     :customModel="customModel"
                     :width="196"
                   ></models-vue>
-                </span>
+                </span> -->
               </li>
               <li
                 class="
@@ -113,12 +121,7 @@
               >
                 {{ $t("Header.Log-in") }}
               </li>
-              <li
-                style="margin-left: 10px; cursor: pointer"
-                @click="handleLanguage()"
-              >
-                Language
-              </li>
+              <!-- <li style="margin-left: 10px; cursor: pointer">Language</li> -->
             </ul>
           </div>
         </div>
@@ -202,6 +205,7 @@ export default {
     const isShowLanguage = ref(false);
     const isPlaceholder = ref(false);
     const isShowShopCart = ref(false);
+    const selectLanguage = ref(false);
     const customModel = reactive({
       animation: true,
       borderRadius: true,
@@ -226,6 +230,7 @@ export default {
       isLoaded.value = true;
     });
     const handleMouseoverNotification = () => {
+      console.log("hover");
       isShowBell.value = true;
     };
     const hanldeMouseleaveNotification = () => {
@@ -259,6 +264,8 @@ export default {
       return store.getters["getLanguge"];
     });
     const handleLanguage = () => {
+      selectLanguage.value = !selectLanguage.value;
+      // console.log(selectLanguage.value);
       // console.log(language);
       // localStorage.setItem("language", language);
       store.dispatch("handleLanguage");
@@ -271,6 +278,7 @@ export default {
       isShowLanguage,
       isPlaceholder,
       isShowShopCart,
+      selectLanguage,
       hanldePlaceholder,
       categorys,
       handleMouseoverLanguage,
@@ -335,6 +343,21 @@ export default {
           .header-right-icon {
             font-size: 1.4rem;
             margin-right: 11px;
+          }
+          .header_select--language {
+            position: relative;
+            // border: none;
+            // background: var(--colers);
+            // color: var(--white-color);
+            // padding: 0px 3px;
+            .header__option-language {
+              position: absolute;
+              // padding: 10px;
+              // background: blue;
+              // background: var(--white-color);
+              // color: var(--black-color);
+              // text-indent: 15px;
+            }
           }
         }
         .custom-connect {
