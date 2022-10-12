@@ -1,13 +1,15 @@
 <template>
-  <span
-    v-if="errorMessage"
-    :class="{
-      'f-12': fontSize,
-      mb: isMb,
-    }"
-  >
-    <slot></slot>
-  </span>
+  <div>
+    <span
+      v-if="errorMessage"
+      :class="{
+        'f-12': fontSize,
+        mb: isMb,
+      }"
+    >
+      <slot></slot>
+    </span>
+  </div>
 </template>
 
 <script>
@@ -30,10 +32,9 @@ export default {
 <style scoped>
 .f-12 {
   font-size: 1.2rem;
-  margin-left: 4px;
+  margin: 3px 0;
   display: block;
   text-align: start;
-  margin-top: -8px;
   color: var(--colers);
 }
 .mb {

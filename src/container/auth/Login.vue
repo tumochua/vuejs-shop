@@ -197,7 +197,7 @@ export default {
   
   <style scoped lang="scss">
 .register__infomation-wapper {
-  text-align: center;
+  // text-align: center;
   padding: 10px;
   .register__infomation-content {
     display: flex;
@@ -253,6 +253,7 @@ export default {
           color: var(--colers);
         }
         .line {
+          text-align: center;
         }
       }
     }

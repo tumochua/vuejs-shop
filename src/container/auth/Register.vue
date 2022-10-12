@@ -13,20 +13,41 @@
               {{ $t("auth.Register") }} </LabelVue
             ><br />
             <div class="register__infomation-form--body">
-              <InputVue
+              {{ userData }}
+              <div class="form-fullName">
+                <WrapperInput
+                  placeholder="First Name"
+                  name="firstName"
+                  :value="informationUses.firstName"
+                  @onChangeValue="handleInput"
+                  :errorMessage="userData.errCode"
+                  :userData="userData"
+                ></WrapperInput>
+                <WrapperInput
+                  placeholder="Last Name"
+                  name="lastName"
+                  :value="informationUses.lastName"
+                  @onChangeValue="handleInput"
+                  :errorMessage="userData.errCode"
+                  :userData="userData"
+                ></WrapperInput>
+              </div>
+              <WrapperInput
                 :placeholder="$t('auth.placeholder.email')"
-                @onChangeValue="handleInput"
                 name="email"
                 :value="informationUses.email"
-                class="register__input"
-              ></InputVue>
-              <InputVue
-                :placeholder="$t('auth.placeholder.password')"
                 @onChangeValue="handleInput"
+                :errorMessage="userData.errCode"
+                :userData="userData"
+              ></WrapperInput>
+              <WrapperInput
+                :placeholder="$t('auth.placeholder.password')"
                 name="password"
                 :value="informationUses.password"
-                class="register__input"
-              ></InputVue>
+                @onChangeValue="handleInput"
+                :errorMessage="userData.errCode"
+                :userData="userData"
+              ></WrapperInput>
               <ButtonVue
                 @onClickEvent="handleRegister"
                 :padding="10"
@@ -36,8 +57,8 @@
               >
                 {{ $t("auth.Register") }}
               </ButtonVue>
-              <span class="line">
-                <TextVue> {{ $t("auth.And") }}</TextVue>
+              <span>
+                <TextVue class="line"> {{ $t("auth.And") }}</TextVue>
               </span>
               <span class="register__infomation-auth">
                 <FaceBookVue></FaceBookVue>
@@ -66,26 +87,30 @@
 
 <script>
 // import Cookies from "js-cookie";
-// import { reactive } from "vue";
+import { onUpdated } from "vue";
 // import { handleApiRegister } from "@/api/index.js";
 import ButtonVue from "@/components/button/Button.vue";
-import InputVue from "@/components/input/Input.vue";
+// import InputVue from "@/components/input/Input.vue";
 import LabelVue from "@/components/label/Lable.vue";
 import FaceBookVue from "@/components/auth/FaceBook.vue";
 import TextVue from "@/components/text/Text.vue";
 import GoogleVue from "@/components/auth/Google.vue";
 import SpanVue from "@/components/span/Span.vue";
+import WrapperInput from "@/components/wrapperInput/WrapperInput.vue";
 import { handleValidateForm } from "@/helper/constants";
+// import ErrorText from "@/components/error/ErrorText.vue";
 export default {
   name: "RegisterVue",
   components: {
     ButtonVue,
-    InputVue,
+    // InputVue,
     LabelVue,
     FaceBookVue,
     GoogleVue,
     TextVue,
     SpanVue,
+    // ErrorText,
+    WrapperInput,
   },
   props: {
     informationUses: {
@@ -95,8 +120,14 @@ export default {
         return {};
       },
     },
+    userData: {
+      type: Object,
+      default() {
+        return {};
+      },
+    },
   },
-  setup({ informationUses }, { emit }) {
+  setup(_, { emit }) {
     const handleInput = (data) => {
       emit("handleInput", data);
       // console.log( informationUses[data.name] = data.value);
@@ -107,9 +138,9 @@ export default {
     // });
 
     const handleRegister = () => {
-      console.log(informationUses);
       emit("handleRegister");
     };
+    onUpdated(() => {});
 
     return { handleRegister, handleInput, handleValidateForm };
     // const informationUses = reactive({
@@ -143,7 +174,7 @@ export default {
 
 <style scoped lang="scss">
 .register__infomation-wapper {
-  text-align: center;
+  // text-align: center;
   padding: 10px;
   .register__infomation-content {
     display: flex;
@@ -174,6 +205,7 @@ export default {
           width: 100% !important;
           padding: 10px;
           margin-bottom: 20px;
+          margin-top: 20px;
         }
         .register__infomation-auth {
           display: grid;
@@ -183,6 +215,10 @@ export default {
         }
         .resigter__nav {
           color: var(--colers);
+        }
+        .form-fullName {
+          display: flex;
+          gap: 10px;
         }
         .line {
         }

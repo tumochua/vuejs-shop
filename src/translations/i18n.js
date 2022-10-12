@@ -12,7 +12,7 @@ const i18n = createI18n({
     en: en,
   },
 });
-console.log("check ", i18n.global.locale);
+// console.log("check ", i18n.global.locale);
 // console.log(actions.handleLanguage);
 // const languages = (i18n.global.locale = handleLanguage);
 // console.log("languages", languages);

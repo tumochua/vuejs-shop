@@ -230,7 +230,6 @@ export default {
       isLoaded.value = true;
     });
     const handleMouseoverNotification = () => {
-      console.log("hover");
       isShowBell.value = true;
     };
     const hanldeMouseleaveNotification = () => {
