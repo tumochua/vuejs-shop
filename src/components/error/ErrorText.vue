@@ -35,6 +35,7 @@ export default {
   text-align: start;
   margin-top: -8px;
   color: var(--colers);
+  /* border: 1px solid var(--colers); */
 }
 .mb {
   margin-bottom: -8px;

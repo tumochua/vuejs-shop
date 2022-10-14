@@ -52,11 +52,8 @@ export default {
     //   type: Boolean,
     // },
   },
-  setup({ name, require }, { emit }) {
+  setup({ name }, { emit }) {
     const onChangeValue = (e) => {
-      if (require) {
-        // console.log("require");
-      }
       emit("onChangeValue", { name: name, value: e.target.value });
       // emit("onChangeValue");
     };

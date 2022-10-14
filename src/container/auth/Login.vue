@@ -14,20 +14,22 @@
             </LabelVue>
             <br />
             <div class="register__infomation-form--body">
+              <span> </span>
               <InputVue
-                :placeholder="$t('auth.placeholder.email')"
                 @onChangeValue="handleInput"
-                name="email"
+                :placeholder="$t('auth.placeholder.email')"
                 :value="informationUses.email"
+                name="email"
                 class="register__input"
                 type="email"
-                :errorInput="result.resultEmail.isError"
+                :errorInput="checkErrorInputEmail"
               ></InputVue>
               <ErrorVue
-                :fontSize="true"
-                :errorMessage="result.resultEmail.isError"
-                :isMb="false"
-                >{{ result.resultEmail.detailMessage }}</ErrorVue
+                v-if="valueEmail"
+                :errorMessage="valueEmail.status"
+                :fontSize="valueEmail.status"
+              >
+                {{ valueEmail.message }}</ErrorVue
               >
               <span class="login__pasworld-wapper">
                 <InputVue
@@ -37,7 +39,7 @@
                   :value="informationUses.password"
                   class="register__input"
                   :type="hadleInputPassworld"
-                  :errorInput="result.resultPassword.isError"
+                  :errorInput="checkErrorInputPassword"
                 ></InputVue>
                 <i
                   v-if="refPassworld"
@@ -51,11 +53,12 @@
                 ></i>
               </span>
               <ErrorVue
-                :fontSize="true"
-                :errorMessage="result.resultPassword.isError"
-                >{{ result.resultPassword.detailMessage }}</ErrorVue
+                v-if="valuePassword"
+                :errorMessage="valuePassword.status"
+                :fontSize="valuePassword.status"
               >
-              <!-- {{ result }} -->
+                {{ valuePassword.message }}</ErrorVue
+              >
               <div>
                 <ButtonVue
                   :padding="10"
@@ -88,9 +91,7 @@
 </template>
   
   <script>
-// import Cookies from "js-cookie";
-import { ref, reactive, computed, onMounted, onUpdated } from "vue";
-// import { handleApiRegister } from "@/api/index.js";
+import { ref, computed, onMounted, onUpdated } from "vue";
 import ButtonVue from "@/components/button/Button.vue";
 import InputVue from "@/components/input/Input.vue";
 import LabelVue from "@/components/label/Lable.vue";
@@ -98,16 +99,17 @@ import FaceBookVue from "@/components/auth/FaceBook.vue";
 import GoogleVue from "@/components/auth/Google.vue";
 import AppVue from "@/components/auth/App.vue";
 import SpanVue from "@/components/span/Span.vue";
+
 import ErrorVue from "@/components/error/ErrorText.vue";
+
 import {
   handleValidateEmail,
-  handleValidatePassword,
-} from "../../helper/constants.js";
-import { useStore } from "vuex";
-// import {handleLogin} from '../../api/index'
-
+  handleChekLength,
+  // handleValidateForm,
+} from "../../helper/constants";
 export default {
   name: "LoginAuthVue",
+
   components: {
     ButtonVue,
     InputVue,
@@ -118,51 +120,57 @@ export default {
     SpanVue,
     ErrorVue,
   },
-  setup() {
-    const informationUses = reactive({
-      email: "",
-      password: "",
-    });
-    const store = useStore();
+  props: {
+    informationUses: {
+      type: Object,
+    },
+  },
+  setup({ informationUses }, { emit }) {
+    const valueEmail = ref();
+    const valuePassword = ref();
     const refPassworld = ref(true);
-    // const errorInput = ref(true);
-    // const errorMessage = ref(true);
-    const result = reactive({
-      resultEmail: {},
-      resultPassword: {},
-    });
-    const handleAuthLogin = () => {
-      result.resultEmail = handleValidateEmail({
-        email: informationUses.email,
-        name: "email",
-      });
-      result.resultPassword = handleValidatePassword({
-        password: informationUses.password,
-        name: "password",
-      });
-      const email = result.resultEmail.error === true;
-      const password = result.resultPassword.error === true;
-      if (email && password) {
-        result.resultEmail.isError = false;
-        result.resultPassword.isError = false;
-        // handleLogin()
-        store.dispatch("handleAuthLogin", informationUses);
+    const checkErrorInputEmail = ref(false);
+    const checkErrorInputPassword = ref(false);
+    function handleOnChanInput(name) {
+      if (valueEmail) {
+        if (name === "email") {
+          valueEmail.value.status = false;
+          valueEmail.value.message = "";
+          checkErrorInputEmail.value = false;
+        }
+      }
+      if (valuePassword) {
+        if (name === "password") {
+          valuePassword.value.status = false;
+          valuePassword.value.message = "";
+          checkErrorInputPassword.value = false;
+        }
+      }
+    }
+    const handleInput = (data) => {
+      handleOnChanInput(data.name);
+
+      emit("handleInput", data);
+    };
+    function handleCheckErrorInput() {
+      // console.log(!valueEmail.value.message);
+      if (!valueEmail.value.message || !valuePassword.value.message) {
+        checkErrorInputEmail.value = false;
+        checkErrorInputPassword.value = false;
       } else {
-        console.log("orror");
+        checkErrorInputEmail.value = true;
+        checkErrorInputPassword.value = true;
+      }
+    }
+    const handleAuthLogin = () => {
+      valueEmail.value = handleValidateEmail(informationUses);
+      valuePassword.value = handleChekLength(informationUses);
+      handleCheckErrorInput();
+      if (valueEmail.value.errCode === 2 && valuePassword.value.errCode === 2) {
+        emit("handleAuthLogin");
       }
     };
-    const handleGetUsers = computed(() => {
-      return store.getters["getUsers"];
-    });
-    const handleInput = (data) => {
-      // if (result.resultEmail.name === "email") {
-      //   result.resultEmail.isError = false;
-      // }
-      // if (result.resultPassword.name === "password") {
-      //   result.resultPassword.isError = false;
-      // }
-      informationUses[data.name] = data.value;
-    };
+
     const hadleInputPassworld = computed(() => {
       return refPassworld.value ? "password" : "text";
     });
@@ -170,26 +178,22 @@ export default {
     const HandleShoHidePasworld = () => {
       refPassworld.value = !refPassworld.value;
     };
-    onMounted(() => {
-      console.log("onMounted login");
-    });
+    onMounted(() => {});
     onUpdated(() => {
       // console.log("onUpdated");
       // console.log(store.state);
     });
 
     return {
-      informationUses,
-      refPassworld,
-      // errorInput,
-      // errorMessage,
-      result,
-      handleValidateEmail,
-      handleInput,
       HandleShoHidePasworld,
-      handleAuthLogin,
+      refPassworld,
       hadleInputPassworld,
-      handleGetUsers,
+      handleInput,
+      handleAuthLogin,
+      valueEmail,
+      valuePassword,
+      checkErrorInputEmail,
+      checkErrorInputPassword,
     };
   },
 };
