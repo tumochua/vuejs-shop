@@ -13,20 +13,65 @@
               {{ $t("auth.Register") }} </LabelVue
             ><br />
             <div class="register__infomation-form--body">
+              {{ dataValiate }}
+              <div>
+                <InputVue
+                  placeholder="First Name"
+                  @onChangeValue="handleInput"
+                  name="firstName"
+                  :value="informationUses.firstName"
+                  :errorInput="dataValiate.firstName.status"
+                  class="register__input"
+                ></InputVue>
+                <ErrorText
+                  v-if="dataValiate.firstName"
+                  :errorMessage="dataValiate.firstName.status"
+                  :fontSize="dataValiate.firstName.status"
+                  >{{ dataValiate.firstName.message }}</ErrorText
+                >
+                <InputVue
+                  placeholder="Last Name"
+                  @onChangeValue="handleInput"
+                  name="lastName"
+                  :value="informationUses.lastName"
+                  :errorInput="dataValiate.lastName.status"
+                  class="register__input"
+                ></InputVue>
+                <ErrorText
+                  v-if="dataValiate.lastName"
+                  :errorMessage="dataValiate.lastName.status"
+                  :fontSize="dataValiate.lastName.status"
+                  >{{ dataValiate.lastName.message }}</ErrorText
+                >
+              </div>
               <InputVue
                 :placeholder="$t('auth.placeholder.email')"
                 @onChangeValue="handleInput"
                 name="email"
                 :value="informationUses.email"
+                :errorInput="dataValiate.email.status"
                 class="register__input"
               ></InputVue>
+              <ErrorText
+                v-if="dataValiate.email"
+                :errorMessage="dataValiate.email.status"
+                :fontSize="dataValiate.email.status"
+                >{{ dataValiate.email.message }}</ErrorText
+              >
               <InputVue
                 :placeholder="$t('auth.placeholder.password')"
                 @onChangeValue="handleInput"
                 name="password"
                 :value="informationUses.password"
                 class="register__input"
+                :errorInput="dataValiate.password.status"
               ></InputVue>
+              <ErrorText
+                v-if="dataValiate.password"
+                :errorMessage="dataValiate.password.status"
+                :fontSize="dataValiate.password.status"
+                >{{ dataValiate.password.message }}</ErrorText
+              >
               <ButtonVue
                 @onClickEvent="handleRegister"
                 :padding="10"
@@ -66,7 +111,7 @@
 
 <script>
 // import Cookies from "js-cookie";
-// import { reactive } from "vue";
+import { reactive } from "vue";
 // import { handleApiRegister } from "@/api/index.js";
 import ButtonVue from "@/components/button/Button.vue";
 import InputVue from "@/components/input/Input.vue";
@@ -75,7 +120,12 @@ import FaceBookVue from "@/components/auth/FaceBook.vue";
 import TextVue from "@/components/text/Text.vue";
 import GoogleVue from "@/components/auth/Google.vue";
 import SpanVue from "@/components/span/Span.vue";
-import { handleValidateForm } from "@/helper/constants";
+import ErrorText from "../../components/error/ErrorText.vue";
+import {
+  handleValidateEmail,
+  handleChekLength,
+  // handleValidateForm,
+} from "../../helper/constants";
 export default {
   name: "RegisterVue",
   components: {
@@ -86,6 +136,7 @@ export default {
     GoogleVue,
     TextVue,
     SpanVue,
+    ErrorText,
   },
   props: {
     informationUses: {
@@ -97,46 +148,34 @@ export default {
     },
   },
   setup({ informationUses }, { emit }) {
+    const dataValiate = reactive({
+      firstName: "",
+      lastName: "",
+      email: "",
+      password: "",
+    });
     const handleInput = (data) => {
+      // dataValiate.firstName.status = false;
+      // dataValiate.firstName.message = "";
       emit("handleInput", data);
-      // console.log( informationUses[data.name] = data.value);
-      // informationUses[data.name] = data.value;
     };
     // watch(informationUses, () => {
     //   console.log("change props");
     // });
+    function handleCheckValidate() {
+      dataValiate.firstName = handleChekLength(informationUses);
+      dataValiate.lastName = handleChekLength(informationUses);
+      dataValiate.password = handleChekLength(informationUses);
+      dataValiate.email = handleValidateEmail(informationUses);
+    }
 
     const handleRegister = () => {
-      console.log(informationUses);
+      handleCheckValidate();
+      console.log(dataValiate);
       emit("handleRegister");
     };
 
-    return { handleRegister, handleInput, handleValidateForm };
-    // const informationUses = reactive({
-    //   firstName: "",
-    //   middleName: "",
-    //   lastName: "",
-    //   mobile: "",
-    //   email: "",
-    //   password: "",
-    // });
-
-    // const handleRegister = async () => {
-    //   try {
-    //     let data = await handleApiRegister(informationUses);
-    //     console.log(data);
-    //   } catch (error) {
-    //     console.log(error);
-    //   }
-    // };
-    // const handleInput = (data) => {
-    //   informationUses[data.name] = data.value;
-    // };
-    // const handleInput = (data) => {
-    //   informationUses[data.name] = data.value;
-    // };
-
-    // return { informationUses, handleRegister, handleInput };
+    return { handleRegister, handleInput, dataValiate };
   },
 };
 </script>

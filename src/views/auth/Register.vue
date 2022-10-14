@@ -53,6 +53,5 @@ export default {
 <style scoped lang="scss">
 .register__wapper {
   background: rgb(238, 77, 45);
-  height: 450px;
 }
 </style>
