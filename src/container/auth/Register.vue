@@ -13,14 +13,12 @@
               {{ $t("auth.Register") }} </LabelVue
             ><br />
             <div class="register__infomation-form--body">
-              {{ dataValiate }}
               <div>
                 <InputVue
                   placeholder="First Name"
                   @onChangeValue="handleInput"
                   name="firstName"
                   :value="informationUses.firstName"
-                  :errorInput="dataValiate.firstName.status"
                   class="register__input"
                 ></InputVue>
                 <ErrorText
@@ -34,7 +32,6 @@
                   @onChangeValue="handleInput"
                   name="lastName"
                   :value="informationUses.lastName"
-                  :errorInput="dataValiate.lastName.status"
                   class="register__input"
                 ></InputVue>
                 <ErrorText
@@ -49,7 +46,6 @@
                 @onChangeValue="handleInput"
                 name="email"
                 :value="informationUses.email"
-                :errorInput="dataValiate.email.status"
                 class="register__input"
               ></InputVue>
               <ErrorText
@@ -64,7 +60,6 @@
                 name="password"
                 :value="informationUses.password"
                 class="register__input"
-                :errorInput="dataValiate.password.status"
               ></InputVue>
               <ErrorText
                 v-if="dataValiate.password"
@@ -114,28 +109,28 @@
 import { reactive } from "vue";
 // import { handleApiRegister } from "@/api/index.js";
 import ButtonVue from "@/components/button/Button.vue";
-import InputVue from "@/components/input/Input.vue";
 import LabelVue from "@/components/label/Lable.vue";
 import FaceBookVue from "@/components/auth/FaceBook.vue";
 import TextVue from "@/components/text/Text.vue";
 import GoogleVue from "@/components/auth/Google.vue";
 import SpanVue from "@/components/span/Span.vue";
-import ErrorText from "../../components/error/ErrorText.vue";
+import InputVue from "@/components/input/Input.vue";
+import ErrorText from "@/components/error/ErrorText.vue";
 import {
   handleValidateEmail,
-  handleChekLength,
+  handleChekLengths,
   // handleValidateForm,
 } from "../../helper/constants";
 export default {
   name: "RegisterVue",
   components: {
     ButtonVue,
-    InputVue,
     LabelVue,
     FaceBookVue,
     GoogleVue,
     TextVue,
     SpanVue,
+    InputVue,
     ErrorText,
   },
   props: {
@@ -163,16 +158,38 @@ export default {
     //   console.log("change props");
     // });
     function handleCheckValidate() {
-      dataValiate.firstName = handleChekLength(informationUses);
-      dataValiate.lastName = handleChekLength(informationUses);
-      dataValiate.password = handleChekLength(informationUses);
-      dataValiate.email = handleValidateEmail(informationUses);
+      dataValiate.firstName = handleChekLengths({
+        data: informationUses.firstName,
+        type: "firstName",
+        minLength: 4,
+      });
+      dataValiate.lastName = handleChekLengths({
+        data: informationUses.lastName,
+        type: "lastName",
+        minLength: 4,
+      });
+      dataValiate.password = handleChekLengths({
+        data: informationUses.password,
+        type: "password",
+        minLength: 6,
+      });
+      dataValiate.email = handleValidateEmail({
+        data: informationUses.email,
+        type: "email",
+      });
     }
 
     const handleRegister = () => {
       handleCheckValidate();
-      console.log(dataValiate);
-      emit("handleRegister");
+      // console.log("dataValiate", dataValiate.email.errCode);
+      const result =
+        dataValiate.email.errCode === 2 &&
+        dataValiate.firstName.errCode === 2 &&
+        dataValiate.lastName.errCode === 2 &&
+        dataValiate.password.errCode === 2;
+      if (result) {
+        emit("handleRegister");
+      }
     };
 
     return { handleRegister, handleInput, dataValiate };

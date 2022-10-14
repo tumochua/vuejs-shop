@@ -1,6 +1,7 @@
 <template>
   <div>
     <HeaderAuthVue></HeaderAuthVue>
+    <ToastVue></ToastVue>
     <Register
       class="register__wapper"
       :informationUses="informationUses"
@@ -16,7 +17,8 @@ import Register from "@/container/auth/Register.vue";
 // import HeaderAuth from "@container/auth/HeaderAuth.vue";
 import HeaderAuthVue from "@/container/auth/HeaderAuth.vue";
 import FooTerVue from "@/container/footer/Footer.vue";
-import { reactive } from "vue";
+import ToastVue from "../../components/toast/Toast.vue";
+import { reactive, ref } from "vue";
 // import { handleApiRegister } from "@/api/index";
 export default {
   name: "RegisterVue",
@@ -24,6 +26,7 @@ export default {
     Register,
     HeaderAuthVue,
     FooTerVue,
+    ToastVue,
   },
   setup() {
     const informationUses = reactive({
@@ -34,18 +37,20 @@ export default {
       email: "",
       password: "",
     });
+    const userData = ref();
     const handleInput = (data) => {
       informationUses[data.name] = data.value;
     };
     const handleRegister = async () => {
       try {
-        // let data = await handleApiRegister(informationUses);
-        console.log(informationUses);
+        let data = await "handleApiRegister"(informationUses);
+        userData.value = data;
+        console.log("informationUses", userData.value.data.data);
       } catch (error) {
         console.log(error);
       }
     };
-    return { informationUses, handleInput, handleRegister };
+    return { informationUses, userData, handleInput, handleRegister };
   },
 };
 </script>
