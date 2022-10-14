@@ -99,13 +99,13 @@ import FaceBookVue from "@/components/auth/FaceBook.vue";
 import GoogleVue from "@/components/auth/Google.vue";
 import AppVue from "@/components/auth/App.vue";
 import SpanVue from "@/components/span/Span.vue";
-
 import ErrorVue from "@/components/error/ErrorText.vue";
 
 import {
   handleValidateEmail,
   handleChekLength,
   // handleValidateForm,
+  // handleValidation,
 } from "../../helper/constants";
 export default {
   name: "LoginAuthVue",
@@ -122,6 +122,9 @@ export default {
   },
   props: {
     informationUses: {
+      type: Object,
+    },
+    userInput: {
       type: Object,
     },
   },
@@ -147,6 +150,7 @@ export default {
         }
       }
     }
+
     const handleInput = (data) => {
       handleOnChanInput(data.name);
 
@@ -183,6 +187,11 @@ export default {
       // console.log("onUpdated");
       // console.log(store.state);
     });
+    const onChangeValue = (data) => {
+      emit("onChangeValue", data);
+    };
+    // const data = handleValidation();
+    // console.log("check data", data);
 
     return {
       HandleShoHidePasworld,
@@ -194,6 +203,7 @@ export default {
       valuePassword,
       checkErrorInputEmail,
       checkErrorInputPassword,
+      onChangeValue,
     };
   },
 };
