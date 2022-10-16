@@ -18,7 +18,7 @@ import HeaderAuthVue from "@/container/auth/HeaderAuth.vue";
 import LoginAuthVue from "@/container/auth/Login.vue";
 import FooterVue from "@/container/footer/Footer.vue";
 import { reactive, onUpdated } from "vue";
-// import { useStore } from "vuex";
+import { useStore } from "vuex";
 // import { handleValidation } from "../../helper/constants";
 
 export default {
@@ -37,7 +37,7 @@ export default {
       email: "",
       password: "",
     });
-    //  const store = useStore();
+    const store = useStore();
     const handleInput = (data) => {
       informationUses[data.name] = data.value;
     };
@@ -45,8 +45,8 @@ export default {
     onUpdated(() => {});
 
     const handleAuthLogin = () => {
-      // store.dispatch("handleAuthLogin",informationUses)
-      console.log("handleAuthLogin", informationUses);
+      store.dispatch("handleAuthLogin", informationUses);
+      // console.log("handleAuthLogin", informationUses);
     };
     const onChangeValue = (data) => {
       userInput[data.name] = data.value;

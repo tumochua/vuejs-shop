@@ -173,10 +173,7 @@ export default {
         type: "password",
         minLength: 6,
       });
-      dataValiate.email = handleValidateEmail({
-        data: informationUses.email,
-        type: "email",
-      });
+      dataValiate.email = handleValidateEmail(informationUses);
     }
 
     const handleRegister = () => {

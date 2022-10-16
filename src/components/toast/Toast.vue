@@ -8,8 +8,8 @@
       <i v-else class="toast__wapper--icon" :class="handleChangeIcon"></i>
     </div>
     <div class="toast__wapper--body">
-      <slot name="body"></slot>
-      <slot name="error" v-if="isErrorToast"></slot>
+      <slot name="error"></slot>
+      <slot></slot>
     </div>
     <div @click="handleCloseToast">
       <i class="fa-solid fa-xmark toast__wapper--icon-close"></i>
@@ -19,6 +19,7 @@
 
 <script>
 import { onMounted, onUpdated, onBeforeUpdate, ref } from "vue";
+// import { useStore } from "vuex";
 export default {
   components: {},
   name: "ToastVue",
@@ -38,11 +39,17 @@ export default {
     handleChangeIcon: {},
     isErrorToast: {},
   },
-  setup({ dateTimes }, { emit }) {
+  setup({ dateTimes }, { emit, slots }) {
+    console.log("check slots", slots);
+    // const store = useStore();
+
     const clear = ref();
     // const handleClick = () => {
     //   isToast.value = !isToast.value;
     // };
+    // const isErrorToast = computed(() => {
+    //   return store.state.isErrorToast;
+    // });
     onMounted(() => {
       // setTimeout(() => {
       //   emit("handleCloseToast");
@@ -63,6 +70,7 @@ export default {
     return {
       // handleClick
       handleCloseToast,
+      // isErrorToast,
     };
   },
 };
