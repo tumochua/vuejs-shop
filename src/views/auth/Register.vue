@@ -72,7 +72,6 @@ export default {
       isToast.value = false;
     };
     const handleRegister = async () => {
-      // console.log(isToast.value);
       try {
         let data = await handleApiRegister(informationUses);
         userData.value = data;
