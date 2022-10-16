@@ -187,7 +187,6 @@ export default {
         dataValiate.firstName.errCode === 2 &&
         dataValiate.lastName.errCode === 2 &&
         dataValiate.password.errCode === 2;
-      console.log(result);
       if (result) {
         emit("handleRegister");
       }

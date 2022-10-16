@@ -1,17 +1,26 @@
 <template>
   <div>
     <HeaderAuthVue></HeaderAuthVue>
-    {{ handleChangeTitleTost }}
     <ToastVue
-      :isToast="isToast"
       @handleCloseToast="handleCloseToast"
+      :isToast="isToast"
       :dateTimes="3000"
-      icon="https://upload.wikimedia.org/wikipedia/commons/7/73/Flat_tick_icon.svg"
       :handleChangeIcon="handleChangeIcon"
+      :isErrorToast="isErrorToast"
     >
-      <template v-slot:body v-if="userData">
-        <span class="toast__title">{{ handleChangeTitleTost }}</span>
-        <p class="toast__description">{{ userData.data.data.message }}</p>
+      <template v-slot:error v-if="isErrorToast">
+        <span>
+          <span class="toast__title">Error</span>
+          <p class="toast__description">Error Serve</p>
+        </span>
+      </template>
+      <template v-slot:body v-else>
+        <span v-if="userData">
+          <span class="toast__title">{{ handleChangeTitleTost }}</span>
+          <p class="toast__description">
+            {{ userData.data.data.message }}
+          </p>
+        </span>
       </template>
     </ToastVue>
     <Register
@@ -55,6 +64,7 @@ export default {
     const userData = ref();
     const isToast = ref(false);
     const isLoader = ref(false);
+    const isErrorToast = ref(false);
     const handleInput = (data) => {
       informationUses[data.name] = data.value;
     };
@@ -64,14 +74,14 @@ export default {
     const handleRegister = async () => {
       // console.log(isToast.value);
       try {
-        isLoader.value = true;
         let data = await handleApiRegister(informationUses);
         userData.value = data;
-        console.log("informationUses", userData.value.data.data.errorCode);
       } catch (error) {
-        console.log(error);
+        console.log("check errr", error);
+        isErrorToast.value = true;
+        console.log(isErrorToast.value);
       } finally {
-        isToast.value = !isToast.value;
+        isToast.value = true;
       }
     };
     const handleChangeTitleTost = computed(() => {
@@ -90,6 +100,7 @@ export default {
       userData,
       isToast,
       isLoader,
+      isErrorToast,
       handleInput,
       handleRegister,
       handleCloseToast,

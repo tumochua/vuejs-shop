@@ -1,13 +1,17 @@
 <template>
   <div class="toast__wapper" v-if="isToast">
     <div>
-      <i :class="handleChangeIcon" class="toast__wapper--icon"></i>
+      <i
+        v-if="isErrorToast"
+        class="fa-solid fa-circle-info toast__wapper--icon-error"
+      ></i>
+      <i v-else class="toast__wapper--icon" :class="handleChangeIcon"></i>
     </div>
     <div class="toast__wapper--body">
       <slot name="body"></slot>
+      <slot name="error" v-if="isErrorToast"></slot>
     </div>
     <div @click="handleCloseToast">
-      <!-- <i :class="handleChangeIcon"></i> -->
       <i class="fa-solid fa-xmark toast__wapper--icon-close"></i>
     </div>
   </div>
@@ -32,6 +36,7 @@ export default {
       type: String,
     },
     handleChangeIcon: {},
+    isErrorToast: {},
   },
   setup({ dateTimes }, { emit }) {
     const clear = ref();
@@ -98,6 +103,11 @@ export default {
   .toast__wapper--icon {
     font-size: 1.7rem;
     cursor: pointer;
+  }
+  .toast__wapper--icon-error {
+    font-size: 1.7rem;
+    cursor: pointer;
+    color: var(--colers);
   }
   .toast__wapper--icon-close {
     font-size: 1.7rem;
