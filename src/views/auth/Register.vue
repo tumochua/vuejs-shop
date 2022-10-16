@@ -39,7 +39,6 @@ import Register from "@/container/auth/Register.vue";
 import HeaderAuthVue from "@/container/auth/HeaderAuth.vue";
 import FooTerVue from "@/container/footer/Footer.vue";
 import ToastVue from "@/components/toast/Toast.vue";
-// import LoaderVue from "@/components/loader/Loader.vue";
 import { reactive, ref, computed } from "vue";
 
 import { handleApiRegister } from "@/api/index";
