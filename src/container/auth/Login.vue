@@ -101,12 +101,7 @@ import AppVue from "@/components/auth/App.vue";
 import SpanVue from "@/components/span/Span.vue";
 import ErrorVue from "@/components/error/ErrorText.vue";
 
-import {
-  handleValidateEmail,
-  handleChekLength,
-  // handleValidateForm,
-  // handleValidation,
-} from "../../helper/constants";
+import { handleValidateEmail, handleChekLength } from "../../helper/constants";
 export default {
   name: "LoginAuthVue",
 
