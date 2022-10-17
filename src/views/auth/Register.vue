@@ -8,20 +8,20 @@
       :handleChangeIcon="handleChangeIcon"
       :isErrorToast="isErrorToast"
     >
-      <template v-slot:error v-if="isErrorToast">
-        <span>
+      <template v-slot:error>
+        <span v-if="isErrorToast">
           <span class="toast__title">Error</span>
           <p class="toast__description">Error Serve</p>
         </span>
       </template>
-      <template v-slot:body v-else>
-        <span v-if="userData">
-          <span class="toast__title">{{ handleChangeTitleTost }}</span>
-          <p class="toast__description">
-            {{ userData.data.data.message }}
-          </p>
-        </span>
-      </template>
+      <span v-if="!isErrorToast && getStateVuex">
+        <span class="toast__title">{{ handleChangeTitleTost }}</span>
+        <p class="toast__description">
+          {{ getStateVuex.message }}
+        </p>
+      </span>
+      <!-- <template v-slot:body v-if="!isErrorToast && getStateVuex">
+      </template> -->
     </ToastVue>
     <Register
       class="register__wapper"
@@ -41,7 +41,8 @@ import FooTerVue from "@/container/footer/Footer.vue";
 import ToastVue from "@/components/toast/Toast.vue";
 import { reactive, ref, computed } from "vue";
 
-import { handleApiRegister } from "@/api/index";
+import { useStore } from "vuex";
+// import { handleApiRegister } from "@/api/index";
 export default {
   name: "RegisterVue",
   components: {
@@ -63,7 +64,8 @@ export default {
     const userData = ref();
     const isToast = ref(false);
     const isLoader = ref(false);
-    const isErrorToast = ref(false);
+    // const isErrorToast = ref(false);
+    const store = useStore();
     const handleInput = (data) => {
       informationUses[data.name] = data.value;
     };
@@ -72,24 +74,38 @@ export default {
     };
     const handleRegister = async () => {
       try {
-        let data = await handleApiRegister(informationUses);
-        userData.value = data;
+        store.dispatch("handleRegister", informationUses);
+        // let data = await handleApiRegister(informationUses);
+        // userData.value = data;
       } catch (error) {
         console.log("check errr", error);
         isErrorToast.value = true;
-        console.log(isErrorToast.value);
       } finally {
         isToast.value = true;
       }
     };
+    const getUserRegister = computed(() => {
+      return store.getters["getUserRegister"];
+    });
+    const getUserRegisterEror = computed(() => {
+      return store.getters["getUserRegisterEror"];
+    });
+    const getStateVuex = computed(() => {
+      return store.state.usersRegisterError;
+    });
+    const isErrorToast = computed(() => {
+      return store.state.isErrorToast;
+    });
     const handleChangeTitleTost = computed(() => {
-      return userData.value && userData.value.data.data.errorCode === 4
+      return store.state.usersRegisterError &&
+        store.state.usersRegisterError.errorCode === 4
         ? "Warning"
         : "Successful";
       // return userData;
     });
     const handleChangeIcon = computed(() => {
-      return userData.value && userData.value.data.data.errorCode === 4
+      return store.state.usersRegisterError &&
+        store.state.usersRegisterError.errorCode === 4
         ? "fa-solid fa-circle-info toast__wapper--icon-warning"
         : "fa-solid fa-circle-check toast__wapper--icon-success";
     });
@@ -99,11 +115,14 @@ export default {
       isToast,
       isLoader,
       isErrorToast,
+      getStateVuex,
       handleInput,
       handleRegister,
       handleCloseToast,
       handleChangeTitleTost,
       handleChangeIcon,
+      getUserRegister,
+      getUserRegisterEror,
     };
   },
 };

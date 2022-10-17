@@ -1,7 +1,10 @@
 const state = {
   couter: 10,
   language: "vi",
-  users: null,
-  userError: null,
+  usersRegister: null,
+  usersRegisterError: null,
+  usersLogin: null,
+  userLoginError: null,
+  isErrorToast: false,
 };
 export default state;

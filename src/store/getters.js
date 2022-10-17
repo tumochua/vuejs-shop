@@ -8,6 +8,14 @@ const getters = {
   getUsers(state) {
     return state.users;
   },
+  getUserRegister(state) {
+    return state.usersRegister;
+  },
+  getUserRegisterEror(state) {
+    if (state.usersRegisterError) {
+      return state.usersRegisterError.message;
+    }
+  },
 };
 
 export default getters;

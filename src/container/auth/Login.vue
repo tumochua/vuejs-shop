@@ -101,12 +101,7 @@ import AppVue from "@/components/auth/App.vue";
 import SpanVue from "@/components/span/Span.vue";
 import ErrorVue from "@/components/error/ErrorText.vue";
 
-import {
-  handleValidateEmail,
-  handleChekLength,
-  // handleValidateForm,
-  // handleValidation,
-} from "../../helper/constants";
+import { handleValidateEmail, handleChekLength } from "../../helper/constants";
 export default {
   name: "LoginAuthVue",
 
@@ -135,14 +130,14 @@ export default {
     const checkErrorInputEmail = ref(false);
     const checkErrorInputPassword = ref(false);
     function handleOnChanInput(name) {
-      if (valueEmail) {
+      if (!valueEmail) {
         if (name === "email") {
           valueEmail.value.status = false;
           valueEmail.value.message = "";
           checkErrorInputEmail.value = false;
         }
       }
-      if (valuePassword) {
+      if (!valuePassword) {
         if (name === "password") {
           valuePassword.value.status = false;
           valuePassword.value.message = "";
@@ -166,6 +161,7 @@ export default {
         checkErrorInputPassword.value = true;
       }
     }
+
     const handleAuthLogin = () => {
       valueEmail.value = handleValidateEmail(informationUses);
       valuePassword.value = handleChekLength(informationUses);

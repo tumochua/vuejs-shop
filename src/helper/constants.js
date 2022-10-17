@@ -2,11 +2,11 @@ const reg =
   // eslint-disable-next-line no-useless-escape
   /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,24}))$/;
 
-const handleValidateEmail = (email) => {
+const handleValidateEmail = ({ email }) => {
   // console.log("check email", email);
   //   console.log("check", data);
   // eslint-disable-next-line no-useless-escape
-  if (reg.test(email.data)) {
+  if (reg.test(email)) {
     return {
       status: true,
       errCode: 2,

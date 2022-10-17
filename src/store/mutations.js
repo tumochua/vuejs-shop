@@ -11,11 +11,22 @@ const mutations = {
         : (state.language = "vi");
     i18n.global.locale = result;
   },
+  handleRegister(state, payload) {
+    state.usersRegister = payload;
+    // console.log("check state vuex", state.usersRegister);
+  },
+  handleToastMessage(state, payload) {
+    state.usersRegisterError = payload;
+    // console.log("check state vuex", state.usersRegisterError);
+  },
+  handleIsErrorToast(state) {
+    state.isErrorToast = true;
+  },
   handleAuthLogin(state, payload) {
-    state.users = payload;
+    state.usersLogin = payload;
   },
   handleSetUserError(state, payload) {
-    state.userError = payload;
+    state.userLoginError = payload;
   },
 };
 
