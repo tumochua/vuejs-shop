@@ -6,5 +6,6 @@ const state = {
   usersLogin: null,
   userLoginError: null,
   isErrorToast: false,
+  isLogout: false,
 };
 export default state;

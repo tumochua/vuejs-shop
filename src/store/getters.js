@@ -16,6 +16,9 @@ const getters = {
       return state.usersRegisterError.message;
     }
   },
+  getUserLogin(state) {
+    return state.usersLogin;
+  },
 };
 
 export default getters;

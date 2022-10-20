@@ -2,8 +2,9 @@ import axios from "axios";
 
 const api = axios.create({
   baseURL: process.env.VUE_APP_BACKEND_URL,
+  withCredentials: true,
   headers: {
-    "Content-type": "application/json; charset=UTF-8",
+    "Content-type": "application/json",
     // Authorization: "Bearer " + "TUMOCHUA",
   },
 });
@@ -17,4 +18,28 @@ const handleApiRegister = (inforUse) => {
 const handleLogin = (user) => {
   return api.post("/login", user);
 };
-export { getHome, handleApiRegister, handleLogin };
+// const handleCheckAdmin = () => {
+//   return api.get("/admin");
+// };
+const handleCheckPrivate = () => {
+  return api.get("/private");
+};
+const handleAuthAdmin = () => {
+  return api.get("/admin");
+};
+const handleAuShipper = () => {
+  return api.get("/shipper");
+};
+const handleAuthSalesman = () => {
+  return api.get("/salesman");
+};
+export {
+  getHome,
+  handleApiRegister,
+  handleLogin,
+  // handleCheckAdmin,
+  handleCheckPrivate,
+  handleAuthAdmin,
+  handleAuShipper,
+  handleAuthSalesman,
+};

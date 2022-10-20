@@ -1,5 +1,6 @@
 import i18n from "@/translations/i18n";
-
+// import { useRoute } from "vue-router";
+// const router = useRoute();
 const mutations = {
   increte(state) {
     state.couter++;
@@ -13,6 +14,7 @@ const mutations = {
   },
   handleRegister(state, payload) {
     state.usersRegister = payload;
+    // router.push("/login");
     // console.log("check state vuex", state.usersRegister);
   },
   handleToastMessage(state, payload) {
@@ -27,6 +29,9 @@ const mutations = {
   },
   handleSetUserError(state, payload) {
     state.userLoginError = payload;
+  },
+  handleLogOut(state) {
+    state.isLogout = true;
   },
 };
 

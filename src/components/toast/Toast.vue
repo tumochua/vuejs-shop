@@ -39,8 +39,7 @@ export default {
     handleChangeIcon: {},
     isErrorToast: {},
   },
-  setup({ dateTimes }, { emit, slots }) {
-    console.log("check slots", slots);
+  setup({ dateTimes }, { emit }) {
     // const store = useStore();
 
     const clear = ref();

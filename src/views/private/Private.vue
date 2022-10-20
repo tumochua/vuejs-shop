@@ -4,11 +4,17 @@
 
 <script>
 import { onMounted } from "vue";
+import { handleCheckPrivate } from "../../api/index";
 export default {
   name: "PrivateVue",
   setup() {
-    onMounted(() => {
-      console.log("onMounted private");
+    onMounted(async () => {
+      try {
+        const data = await handleCheckPrivate();
+        console.log("check data", data);
+      } catch (error) {
+        console.log(error);
+      }
     });
   },
 };

@@ -18,7 +18,10 @@ import HeaderAuthVue from "@/container/auth/HeaderAuth.vue";
 import LoginAuthVue from "@/container/auth/Login.vue";
 import FooterVue from "@/container/footer/Footer.vue";
 import { reactive, onUpdated } from "vue";
+
 import { useStore } from "vuex";
+
+import { useRouter } from "vue-router";
 // import { handleValidation } from "../../helper/constants";
 
 export default {
@@ -29,6 +32,8 @@ export default {
     FooterVue,
   },
   setup() {
+    const store = useStore();
+    const router = useRouter();
     const informationUses = reactive({
       email: "",
       password: "",
@@ -37,15 +42,18 @@ export default {
       email: "",
       password: "",
     });
-    const store = useStore();
     const handleInput = (data) => {
       informationUses[data.name] = data.value;
     };
 
     onUpdated(() => {});
 
-    const handleAuthLogin = () => {
-      store.dispatch("handleAuthLogin", informationUses);
+    const handleAuthLogin = async () => {
+      await store.dispatch("handleAuthLogin", informationUses);
+      console.log("check state vuex", store.state.usersLogin);
+      if (store.state.usersLogin) {
+        router.push({ name: "Home" });
+      }
       // console.log("handleAuthLogin", informationUses);
     };
     const onChangeValue = (data) => {
