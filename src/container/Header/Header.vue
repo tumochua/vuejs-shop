@@ -1,5 +1,6 @@
 <template>
   <header class="header-container">
+    <!-- {{ getValueLocalStorege }} -->
     <div class="grid">
       <div class="header-container-top">
         <div class="header-container-top-right">
@@ -106,6 +107,7 @@
                 </span> -->
               </li>
               <li
+                v-if="!getValueLocalStorege"
                 class="
                   header-right-icons
                   header-container-top-wapper-item
@@ -116,11 +118,35 @@
                 {{ $t("Header.Register") }}
               </li>
               <li
+                v-if="!getValueLocalStorege"
                 class="header-right-icons header-container-top-wapper-item"
                 @click="hanldeRouteLogin"
               >
                 {{ $t("Header.Log-in") }}
               </li>
+              <!-- {{ getValueLocalStorege }} -->
+              <li
+                v-if="getValueLocalStorege"
+                class="header__profile"
+                @click="handleAdmin"
+              >
+                {{ getValueLocalStorege }}
+              </li>
+              <a
+                href="/"
+                @click="handleLogOut"
+                v-if="getValueLocalStorege"
+                class="header__logout"
+              >
+                {{ $t("auth.Logout") }}
+              </a>
+              <!-- <li
+                class="header__logout"
+                @click="handleLogOut"
+                v-if="getValueLocalStorege"
+              >
+                {{ $t("auth.Logout") }}
+              </li> -->
               <!-- <li style="margin-left: 10px; cursor: pointer">Language</li> -->
             </ul>
           </div>
@@ -181,14 +207,19 @@
         </div>
       </div>
     </div>
+    <!-- <router-link to="/admin">Admin</router-link> -->
+    <!-- <div>Admin</div> -->
   </header>
 </template>
 
 <script>
-import { onMounted, ref, reactive, computed } from "vue";
+import { onMounted, ref, reactive, computed, onUpdated } from "vue";
 import { useRouter } from "vue-router";
 import { useStore } from "vuex";
 import ModelsVue from "@/components/models/Models.vue";
+
+import Cookies from "js-cookie";
+
 export default {
   name: "HomeContent",
   components: {
@@ -206,6 +237,7 @@ export default {
     const isPlaceholder = ref(false);
     const isShowShopCart = ref(false);
     const selectLanguage = ref(false);
+    const isLogout = ref(false);
     const customModel = reactive({
       animation: true,
       borderRadius: true,
@@ -228,9 +260,13 @@ export default {
 
     onMounted(() => {
       isLoaded.value = true;
+      // const newObject = JSON.parse(localStorage.getItem("user"));
+      // console.log("newObject ", newObject);
+    });
+    onUpdated(() => {
+      // console.log("check state vuex", store.state.usersLogin);
     });
     const handleMouseoverNotification = () => {
-      console.log("hover");
       isShowBell.value = true;
     };
     const hanldeMouseleaveNotification = () => {
@@ -270,6 +306,34 @@ export default {
       // localStorage.setItem("language", language);
       store.dispatch("handleLanguage");
     };
+    const handelCheckLogin = computed(() => {
+      return store.state.usersLogin
+        ? `${store.state.usersLogin.lastName} ${store.state.usersLogin.firstName}`
+        : "";
+    });
+    const getUserLogin = computed(() => {
+      return store.getters["getUserLogin"];
+    });
+    const newObject = JSON.parse(localStorage.getItem("user"));
+    const getValueLocalStorege = computed(() => {
+      return newObject
+        ? `${newObject.data.lastName} ${newObject.data.firstName}`
+        : "";
+    });
+    const handleAdmin = () => {
+      if (newObject) {
+        console.log("check me");
+        router.push({
+          name: "ProfileUser",
+          params: { id: newObject.data.id },
+        });
+      }
+    };
+    const handleLogOut = () => {
+      store.dispatch("handleLogOut");
+      Cookies.remove("token");
+      localStorage.removeItem("user");
+    };
 
     return {
       isLoaded,
@@ -291,6 +355,12 @@ export default {
       hanldeRouteLogin,
       handleLanguage,
       handeleGetLanguge,
+      handelCheckLogin,
+      getUserLogin,
+      getValueLocalStorege,
+      handleAdmin,
+      handleLogOut,
+      isLogout,
     };
   },
 };
@@ -359,6 +429,16 @@ export default {
               // text-indent: 15px;
             }
           }
+        }
+        .header__profile {
+          margin-left: 11px;
+          margin-right: 11px;
+          cursor: pointer;
+        }
+        .header__logout {
+          color: var(--white-color);
+          text-decoration: none;
+          cursor: pointer;
         }
         .custom-connect {
           .header-left-icons {

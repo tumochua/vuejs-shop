@@ -42,6 +42,7 @@ import ToastVue from "@/components/toast/Toast.vue";
 import { reactive, ref, computed } from "vue";
 
 import { useStore } from "vuex";
+import { useRouter } from "vue-router";
 // import { handleApiRegister } from "@/api/index";
 export default {
   name: "RegisterVue",
@@ -61,11 +62,13 @@ export default {
       email: "",
       password: "",
     });
+    const store = useStore();
+    const router = useRouter();
+
     const userData = ref();
     const isToast = ref(false);
     const isLoader = ref(false);
     // const isErrorToast = ref(false);
-    const store = useStore();
     const handleInput = (data) => {
       informationUses[data.name] = data.value;
     };
@@ -74,7 +77,14 @@ export default {
     };
     const handleRegister = async () => {
       try {
-        store.dispatch("handleRegister", informationUses);
+        await store.dispatch("handleRegister", informationUses);
+        if (
+          getUserVuex &&
+          getUserVuex.value &&
+          getUserVuex.value.errorCode === 2
+        ) {
+          router.push({ name: "Login" });
+        }
         // let data = await handleApiRegister(informationUses);
         // userData.value = data;
       } catch (error) {
@@ -92,6 +102,9 @@ export default {
     });
     const getStateVuex = computed(() => {
       return store.state.usersRegisterError;
+    });
+    const getUserVuex = computed(() => {
+      return store.state.usersRegister;
     });
     const isErrorToast = computed(() => {
       return store.state.isErrorToast;
@@ -116,6 +129,7 @@ export default {
       isLoader,
       isErrorToast,
       getStateVuex,
+      getUserVuex,
       handleInput,
       handleRegister,
       handleCloseToast,

@@ -33,6 +33,7 @@
     "placeholder": {
       "email": "Email",
       "password": "Mật Khẩu"
-    }
+    },
+    "Logout": "Đăng Xuất"
   }
 }
