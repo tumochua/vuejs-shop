@@ -1,26 +1,14 @@
 <template>
   <div class="admin__wapper">
     <div class="admin__body grid">
-      <div class="admin__body-sidebar">sidebar</div>
+      <SideBar :sideBars="sideBars"></SideBar>
       <div class="admin__body-content">
-        <div class="admin__wapper-header grid">
-          <div class="header__left">
-            <input class="header__left-input" placeholder="Search here..." />
-            <img
-              src="../../assets/admin/icon-search.png"
-              class="header__left-icon--search"
-            />
-          </div>
-          <div class="header__right">
-            <img src="../../assets/admin/icon-bell.png" />
-            <img
-              src="../../assets/admin/icon-avatar.png"
-              class="header__right-avatar"
-            />
-            <img src="../../assets/admin/icon-dropdown.png" />
-          </div>
+        <ProfileHeader></ProfileHeader>
+        <div class="body__content-wapper">
+          <SalesSummary :salesSummarys="salesSummarys"></SalesSummary>
+          <TopProducts></TopProducts>
+          <MyEarnings></MyEarnings>
         </div>
-        <div>content</div>
       </div>
     </div>
   </div>
@@ -29,37 +17,116 @@
 <script>
 import { useRoute } from "vue-router";
 import { computed, onMounted, reactive } from "vue";
+// import img from '../../assets/admin/sidebar/dashboard.png'
+import SalesSummary from "./SalesSummary.vue";
+import SideBar from "./SideBar.vue";
+import ProfileHeader from "./ProfileHeader.vue";
+import TopProducts from "./TopProducts.vue";
+import MyEarnings from "./MyEarnings.vue";
 export default {
   name: "ProfileUser",
+  components: {
+    SalesSummary,
+    SideBar,
+    ProfileHeader,
+    TopProducts,
+    MyEarnings,
+  },
   setup() {
     const route = useRoute();
     const sideBars = reactive([
       {
         id: 1,
         name: "Dashboard",
-        icon: "../../assets/admin/sidebar/dashboard.png",
+
+        icon: require("@/assets/admin/sidebar/dashboard.png"),
       },
       {
         id: 2,
-        name: "Dashboard",
-        icon: "../../assets/admin/sidebar/dashboard.png",
+        name: "Profile",
+        icon: require("@/assets/admin/sidebar/profile.png"),
       },
       {
         id: 3,
-        name: "Dashboard",
-        icon: "../../assets/admin/sidebar/dashboard.png",
+        name: "Leaderboard",
+        icon: require("@/assets/admin/sidebar/leaderboard.png"),
       },
       {
         id: 4,
-        name: "Dashboard",
-        icon: "../../assets/admin/sidebar/dashboard.png",
+        name: "Order",
+        icon: require("@/assets/admin/sidebar/order.png"),
+      },
+      {
+        id: 5,
+        name: "Product",
+        icon: require("@/assets/admin/sidebar/product.png"),
+      },
+      {
+        id: 6,
+        name: "Sales Report",
+        icon: require("@/assets/admin/sidebar/sales-report.png"),
+      },
+      {
+        id: 7,
+        name: "Message",
+        icon: require("@/assets/admin/sidebar/message.png"),
+      },
+      {
+        id: 8,
+        name: "Settings",
+        icon: require("@/assets/admin/sidebar/settings.png"),
+      },
+      {
+        id: 9,
+        name: "Favourite",
+        icon: require("@/assets/admin/sidebar/favourite.png"),
+      },
+      {
+        id: 10,
+        name: "History",
+        icon: require("@/assets/admin/sidebar/history.png"),
+      },
+      {
+        id: 11,
+        name: "Signout",
+        icon: require("@/assets/admin/sidebar/logout.png"),
+      },
+    ]);
+    const salesSummarys = reactive([
+      {
+        id: 1,
+        icon: require("@/assets/admin/admin-content/icon-sales.png"),
+        turnover: "$5k",
+        title: "Total Sales",
+        description: "+10% from yesterday",
+      },
+      {
+        id: 2,
+        icon: require("@/assets/admin/admin-content/icon-order.png"),
+        turnover: "500",
+        title: "Total Order",
+        description: "+8% from yesterday",
+      },
+      {
+        id: 1,
+        icon: require("@/assets/admin/admin-content/icon-production.png"),
+        turnover: "9",
+        title: "Product Sold",
+        description: "+2% from yesterday",
+      },
+      {
+        id: 1,
+        icon: require("@/assets/admin/admin-content/icon-customer.png"),
+        turnover: "12",
+        title: "New Customer",
+        description: "+3% from yesterday",
       },
     ]);
     onMounted(() => {});
     const idRoute = computed(() => {
       return route.params.id;
     });
-    return { idRoute, sideBars };
+    return { idRoute, sideBars, salesSummarys };
   },
 };
 </script>
@@ -67,56 +134,16 @@ export default {
 <style scoped lang="scss">
 .admin__wapper {
   background: #21222d;
-
   width: 100%;
-  height: 500px;
   color: var(--white-color);
-  .admin__wapper-header {
-    display: flex;
-    justify-content: space-between;
-    padding-top: 17px;
-    align-items: center;
-    margin-bottom: 23px;
-    .header__left {
-      width: 470px;
-      height: 44px;
-      position: relative;
-      .header__left-input {
-        width: 100%;
-        height: 100%;
-        border: none;
-        border-radius: 4px;
-        background: #30313a;
-        padding-left: 30px;
-        outline: none;
-        color: var(--white-color);
-      }
-      .header__left-icon--search {
-        position: absolute;
-        // right: 0;
-        left: 14px;
-        top: 50%;
-        transform: translate(-50%, -50%);
-        cursor: pointer;
-      }
-    }
-    .header__right {
-      display: flex;
-      align-items: center;
-      .header__right-avatar {
-        margin: 0 15px;
-      }
-    }
-  }
   .admin__body {
     display: flex;
     gap: 27px;
-    .admin__body-sidebar {
-      margin-top: 55px;
-      width: 20%;
-    }
+
     .admin__body-content {
-      width: 80%;
+      width: 87%;
+      .body__content-wapper {
+      }
     }
   }
 }

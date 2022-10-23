@@ -88,6 +88,12 @@ const routes = [
     name: "ProfileUser",
     component: ProfileUser,
     beforeEnter(to, from, next) {
+      // const checkToken = Cookies.get("token");
+      // if (checkToken) {
+      //   next();
+      // } else {
+      //   next("/login");
+      // }
       if (
         JSON.parse(localStorage.getItem("user")) &&
         JSON.parse(localStorage.getItem("user")).data.admin === 5

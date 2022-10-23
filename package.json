@@ -9,6 +9,7 @@
   },
   "dependencies": {
     "axios": "^0.27.2",
+    "chart.js": "^3.9.1",
     "core-js": "^3.8.3",
     "firebase": "^9.9.3",
     "js-cookie": "^3.0.1",
@@ -16,6 +17,7 @@
     "sass-loader": "^13.0.2",
     "style-loader": "^3.3.1",
     "vue": "^3.2.13",
+    "vue-chartjs": "^4.1.2",
     "vue-i18n": "^9.2.2",
     "vue-router": "4",
     "vuex": "^4.0.2"
