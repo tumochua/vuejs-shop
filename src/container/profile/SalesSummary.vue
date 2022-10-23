@@ -44,9 +44,9 @@
 </template>
 
 <script>
-import { reactive } from "vue";
-
 import MyChart from "./MyChart.vue";
+
+import { reactive } from "vue";
 
 export default {
   name: "SalesSummary",
@@ -123,6 +123,7 @@ export default {
       .body__content-left-sales {
         margin-top: 5px;
         color: #a0a0a0;
+        font-size: 1.2rem;
       }
     }
     .content__turnover {
@@ -177,9 +178,10 @@ export default {
     .colum__wapper--botton {
       border-top: 1px solid rgba(255, 255, 255, 0.06);
       display: flex;
-      justify-content: space-between;
+      justify-content: space-around;
       align-items: center;
       padding-top: 6px;
+      font-size: 1.2rem;
 
       .colum__wapper--botton--voloum {
         display: flex;

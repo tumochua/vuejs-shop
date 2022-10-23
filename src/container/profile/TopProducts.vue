@@ -1,8 +1,8 @@
 <template>
-  <div>
-    <h1>topTitleProducts</h1>
-    <div class="production__wapper">
-      <div class="production__wapper-title">
+  <div class="production__wapper">
+    <div class="production__wapper-production">
+      <h1 class="production-title">Top Products</h1>
+      <div class="production__wapper-list">
         <ul
           v-for="topTitleProduct in topTitleProducts"
           :key="topTitleProduct.id"
@@ -15,8 +15,26 @@
           </span>
         </ul>
       </div>
-      <div class="production__line">
-        <MyChart :data="data" type="line"></MyChart>
+    </div>
+    <div class="production__line">
+      <div>
+        <MyChart :data="data" type="line" :options="options"></MyChart>
+      </div>
+      <div class="production__line-foot-wapper">
+        <div class="production-foot-date">
+          <div class="production-foot-date-item">
+            <input type="radio" />
+            <p class="production-foot-titile">Last Month</p>
+          </div>
+          <div>$4,087</div>
+        </div>
+        <div class="production-foot-date">
+          <div class="production-foot-date-item">
+            <input type="radio" />
+            <p class="production-foot-titile">Last Month</p>
+          </div>
+          <div>$4,087</div>
+        </div>
       </div>
     </div>
   </div>
@@ -78,36 +96,40 @@ export default {
       },
     ]);
 
-    const labels = reactive([
-      "Janunary",
-      "February",
-      "March",
-      "April",
-      "May",
-      "June",
-      "July",
-    ]);
     const data = reactive({
-      labels: labels,
+      labels: [
+        "Tokyo",
+        "Mumbai",
+        "Mexico City",
+        "Shanghai",
+        "Sao Paulo",
+        "New York",
+        "Karachi",
+      ],
       datasets: [
         {
-          label: "My First Dataset",
-          data: [65, 59, 80, 81, 56, 55, 40],
-          fill: false,
-          borderColor: "rgb(75, 192, 192)",
-          tension: 0.1,
+          label: "Series 1", // Name the series
+          data: [500, 50, 2424, 14040, 14141, 4111, 4544], // Specify the data values array
+          fill: true,
+          borderColor: "#2196f3", // Add custom color border (Line)
+          backgroundColor: "#2196f3", // Add custom color background (Points and Fill)
+          borderWidth: 1, // Specify bar border width
         },
         {
-          label: "My First Dataset",
-          data: [12, 22, 10, 31, 35, 30, 60],
-          fill: false,
-          borderColor: "rgb(75, 192, 192)",
-          tension: 0.1,
+          label: "Series 2", // Name the series
+          data: [1288, 88942, 44545, 7588, 99, 242, 1417], // Specify the data values array
+          fill: true,
+          borderColor: "#4CAF50", // Add custom color border (Line)
+          backgroundColor: "#4CAF50", // Add custom color background (Points and Fill)
+          borderWidth: 1, // Specify bar border width
         },
       ],
     });
-
-    return { topTitleProducts, listProducts, data };
+    const options = reactive({
+      responsive: true, // Instruct chart js to respond nicely.
+      maintainAspectRatio: false, // Add to prevent default behaviour of full-width/height
+    });
+    return { topTitleProducts, listProducts, data, options };
   },
 };
 </script>
@@ -118,7 +140,7 @@ export default {
   display: flex;
   gap: 14px;
 
-  .production__wapper-title {
+  .production__wapper-production {
     border-radius: 10px;
     padding: 20px 14px;
     margin-bottom: 20px;
@@ -126,14 +148,22 @@ export default {
     font-size: 1.6rem;
     background: #30313a;
     width: 75%;
-    display: grid;
-    grid-template-columns: 1fr 2fr 3fr 1fr;
-    ul {
-      list-style: none;
+    display: flex;
+    flex-direction: column;
+    .production-title {
+      margin-top: 14px;
+      margin-bottom: 20px;
     }
-    .producton-list-title {
-      padding: 13px;
-      opacity: 0.8;
+    .production__wapper-list {
+      display: grid;
+      grid-template-columns: 1fr 2fr 3fr 1fr;
+      ul {
+        list-style: none;
+      }
+      .producton-list-title {
+        padding: 13px;
+        opacity: 0.8;
+      }
     }
     .producton-list {
       border-top: 1px solid rgba(255, 255, 255, 0.06);
@@ -141,6 +171,23 @@ export default {
     }
   }
   .production__line {
+    .production__line-foot-wapper {
+      display: flex;
+      justify-content: space-around;
+      align-items: center;
+      .production-foot-date {
+        margin-top: 10px;
+        text-align: center;
+        font-size: 1.2rem;
+        .production-foot-date-item {
+          display: flex;
+          margin-bottom: 5px;
+          .production-foot-titile {
+            margin-left: 5px;
+          }
+        }
+      }
+    }
   }
 }
 </style>
