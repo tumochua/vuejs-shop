@@ -8,7 +8,19 @@ import FromTest from "./components/test/FromTest.vue";
 import MyAdmin from "@/container/admin/MyAdmin.vue";
 import MyShipper from "./container/shipper/MyShipper.vue";
 import MySalesman from "./container/salesman/MySalesman.vue";
+
 import ProfileUser from "./container/profile/ProfileUser.vue";
+import MyUsers from "./container/profile/MyUsers.vue";
+import MyLeaderboard from "./container/profile/MyLeaderboard.vue";
+import MyOrders from "./container/profile/MyOrders.vue";
+import MyProducts from "./container/profile/MyProducts.vue";
+import MySalesReport from "./container/profile/MySalesReport.vue";
+import MyMessage from "./container/profile/MyMessage.vue";
+import MySettings from "./container/profile/MySettings.vue";
+import MyFavourite from "./container/profile/MyFavourite.vue";
+import MyHistory from "./container/profile/MyHistory.vue";
+import MySignout from "./container/profile/MySignout.vue";
+
 import NotFound from "./NotFound/NotFound.vue";
 import { createRouter, createWebHistory } from "vue-router";
 import Cookies from "js-cookie";
@@ -23,6 +35,7 @@ const routes = [
   },
   { path: "/detail/:id", name: "Detail", component: DetailVue },
   { path: "/from", component: FromTest },
+
   {
     path: "/private",
     name: "Private",
@@ -83,10 +96,222 @@ const routes = [
       }
     },
   },
+
   {
-    path: "/profile/:id",
+    path: "/profile/admin/:id",
     name: "ProfileUser",
     component: ProfileUser,
+    beforeEnter(to, from, next) {
+      // const checkToken = Cookies.get("token");
+      // if (checkToken) {
+      //   next();
+      // } else {
+      //   next("/login");
+      // }
+      if (
+        JSON.parse(localStorage.getItem("user")) &&
+        JSON.parse(localStorage.getItem("user")).data.admin === 5
+      ) {
+        next();
+      } else {
+        next("/");
+      }
+    },
+  },
+
+  {
+    path: "/profile/myusers",
+    name: "MyUsers",
+    component: MyUsers,
+    beforeEnter(to, from, next) {
+      // const checkToken = Cookies.get("token");
+      // if (checkToken) {
+      //   next();
+      // } else {
+      //   next("/login");
+      // }
+      if (
+        JSON.parse(localStorage.getItem("user")) &&
+        JSON.parse(localStorage.getItem("user")).data.admin === 5
+      ) {
+        next();
+      } else {
+        next("/");
+      }
+    },
+  },
+  {
+    path: "/profile/admin/leaderboard",
+    name: "MyLeaderboard",
+    component: MyLeaderboard,
+    beforeEnter(to, from, next) {
+      // const checkToken = Cookies.get("token");
+      // if (checkToken) {
+      //   next();
+      // } else {
+      //   next("/login");
+      // }
+      if (
+        JSON.parse(localStorage.getItem("user")) &&
+        JSON.parse(localStorage.getItem("user")).data.admin === 5
+      ) {
+        next();
+      } else {
+        next("/");
+      }
+    },
+  },
+  {
+    path: "/profile/admin/order",
+    name: "MyOrders",
+    component: MyOrders,
+    beforeEnter(to, from, next) {
+      // const checkToken = Cookies.get("token");
+      // if (checkToken) {
+      //   next();
+      // } else {
+      //   next("/login");
+      // }
+      if (
+        JSON.parse(localStorage.getItem("user")) &&
+        JSON.parse(localStorage.getItem("user")).data.admin === 5
+      ) {
+        next();
+      } else {
+        next("/");
+      }
+    },
+  },
+  {
+    path: "/profile/admin/prodicts",
+    name: "MyProducts",
+    component: MyProducts,
+    beforeEnter(to, from, next) {
+      // const checkToken = Cookies.get("token");
+      // if (checkToken) {
+      //   next();
+      // } else {
+      //   next("/login");
+      // }
+      if (
+        JSON.parse(localStorage.getItem("user")) &&
+        JSON.parse(localStorage.getItem("user")).data.admin === 5
+      ) {
+        next();
+      } else {
+        next("/");
+      }
+    },
+  },
+  {
+    path: "/profile/admin/salesseport",
+    name: "MySalesReport",
+    component: MySalesReport,
+    beforeEnter(to, from, next) {
+      // const checkToken = Cookies.get("token");
+      // if (checkToken) {
+      //   next();
+      // } else {
+      //   next("/login");
+      // }
+      if (
+        JSON.parse(localStorage.getItem("user")) &&
+        JSON.parse(localStorage.getItem("user")).data.admin === 5
+      ) {
+        next();
+      } else {
+        next("/");
+      }
+    },
+  },
+  {
+    path: "/profile/admin/message",
+    name: "MyMessage",
+    component: MyMessage,
+    beforeEnter(to, from, next) {
+      // const checkToken = Cookies.get("token");
+      // if (checkToken) {
+      //   next();
+      // } else {
+      //   next("/login");
+      // }
+      if (
+        JSON.parse(localStorage.getItem("user")) &&
+        JSON.parse(localStorage.getItem("user")).data.admin === 5
+      ) {
+        next();
+      } else {
+        next("/");
+      }
+    },
+  },
+  {
+    path: "/profile/admin/settings",
+    name: "MySettings",
+    component: MySettings,
+    beforeEnter(to, from, next) {
+      // const checkToken = Cookies.get("token");
+      // if (checkToken) {
+      //   next();
+      // } else {
+      //   next("/login");
+      // }
+      if (
+        JSON.parse(localStorage.getItem("user")) &&
+        JSON.parse(localStorage.getItem("user")).data.admin === 5
+      ) {
+        next();
+      } else {
+        next("/");
+      }
+    },
+  },
+  {
+    path: "/profile/admin/favourite",
+    name: "MyFavourite",
+    component: MyFavourite,
+    beforeEnter(to, from, next) {
+      // const checkToken = Cookies.get("token");
+      // if (checkToken) {
+      //   next();
+      // } else {
+      //   next("/login");
+      // }
+      if (
+        JSON.parse(localStorage.getItem("user")) &&
+        JSON.parse(localStorage.getItem("user")).data.admin === 5
+      ) {
+        next();
+      } else {
+        next("/");
+      }
+    },
+  },
+  {
+    path: "/profile/admin/history",
+    name: "MyHistory",
+    component: MyHistory,
+    beforeEnter(to, from, next) {
+      // const checkToken = Cookies.get("token");
+      // if (checkToken) {
+      //   next();
+      // } else {
+      //   next("/login");
+      // }
+      if (
+        JSON.parse(localStorage.getItem("user")) &&
+        JSON.parse(localStorage.getItem("user")).data.admin === 5
+      ) {
+        next();
+      } else {
+        next("/");
+      }
+    },
+  },
+  {
+    path: "/profile/admin/signout",
+    name: "MySignout",
+    component: MySignout,
     beforeEnter(to, from, next) {
       // const checkToken = Cookies.get("token");
       // if (checkToken) {

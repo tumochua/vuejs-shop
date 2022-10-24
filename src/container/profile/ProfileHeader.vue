@@ -31,6 +31,7 @@ export default {
   padding-top: 17px;
   align-items: center;
   margin-bottom: 23px;
+  padding-bottom: 17px;
   .header__left {
     width: 470px;
     height: 44px;
