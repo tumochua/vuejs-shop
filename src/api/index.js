@@ -33,6 +33,29 @@ const handleAuShipper = () => {
 const handleAuthSalesman = () => {
   return api.get("/salesman");
 };
+const handleGetAllUsers = () => {
+  return api.get("/get-all-users");
+};
+const handleGetPagingListUsers = (id) => {
+  // console.log(id);
+  const isId = id ? id : 1;
+  return api.get(`/users?page=${isId}`);
+};
+const handleDeleteUser = (userId) => {
+  return api.delete(`/delete-user`, {
+    data: {
+      id: userId,
+    },
+  });
+};
+
+const handleApiEditUser = (data) => {
+  return api.put("/edit-user", data);
+};
+const handleGetDetailUser = (userId) => {
+  return api.get(`/get-user-detail-by-id?userId=${userId}`);
+};
+
 export {
   getHome,
   handleApiRegister,
@@ -42,4 +65,9 @@ export {
   handleAuthAdmin,
   handleAuShipper,
   handleAuthSalesman,
+  handleGetAllUsers,
+  handleGetPagingListUsers,
+  handleDeleteUser,
+  handleApiEditUser,
+  handleGetDetailUser,
 };

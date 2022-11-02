@@ -61,7 +61,7 @@
               >
               <div>
                 <ButtonVue
-                  :padding="10"
+                  :padding="false"
                   :BtnTextColor="true"
                   :fontSize="1.6"
                   class="register__buuton"

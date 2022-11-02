@@ -48,6 +48,7 @@ export default {
   /* btn */
   --btn-color: #ee4d2d;
   --colers: #ee4d2d;
+  --color-primary: rgb(45, 164, 79);
 }
 html {
   font-size: 62.5%;

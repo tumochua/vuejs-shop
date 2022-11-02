@@ -36,9 +36,11 @@ export default {
   setup() {
     const route = useRoute();
 
-    onMounted(() => {});
+    onMounted(() => {
+      console.log(route.params);
+    });
     const idRoute = computed(() => {
-      return route.params.id;
+      return route.params;
     });
     return { idRoute };
   },

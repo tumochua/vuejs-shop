@@ -36,7 +36,9 @@ export default {
     icon: {
       type: String,
     },
-    handleChangeIcon: {},
+    handleChangeIcon: {
+      type: String,
+    },
     isErrorToast: {},
   },
   setup({ dateTimes }, { emit }) {

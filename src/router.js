@@ -11,6 +11,7 @@ import MySalesman from "./container/salesman/MySalesman.vue";
 
 import ProfileUser from "./container/profile/ProfileUser.vue";
 import MyUsers from "./container/profile/MyUsers.vue";
+import MyEditUser from "./container/profile/MyEditUser.vue";
 import MyLeaderboard from "./container/profile/MyLeaderboard.vue";
 import MyOrders from "./container/profile/MyOrders.vue";
 import MyProducts from "./container/profile/MyProducts.vue";
@@ -120,7 +121,7 @@ const routes = [
   },
 
   {
-    path: "/profile/myusers",
+    path: "/users/page/:id",
     name: "MyUsers",
     component: MyUsers,
     beforeEnter(to, from, next) {
@@ -140,6 +141,29 @@ const routes = [
       }
     },
   },
+
+  {
+    path: "/user/edit/:id",
+    name: "MyEditUser",
+    component: MyEditUser,
+    beforeEnter(to, from, next) {
+      // const checkToken = Cookies.get("token");
+      // if (checkToken) {
+      //   next();
+      // } else {
+      //   next("/login");
+      // }
+      if (
+        JSON.parse(localStorage.getItem("user")) &&
+        JSON.parse(localStorage.getItem("user")).data.admin === 5
+      ) {
+        next();
+      } else {
+        next("/");
+      }
+    },
+  },
+
   {
     path: "/profile/admin/leaderboard",
     name: "MyLeaderboard",
