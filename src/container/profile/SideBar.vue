@@ -4,6 +4,7 @@
       <li class="sidebar__item">
         <img :src="sideBar.icon" class="sidebar__item-icon" />
         <!-- <span class="sidebar__item-name">{{ sideBar.name }}</span> -->
+        <!-- :params="sideBar.params.id" -->
         <router-link
           :to="{ name: sideBar.routerLinks.name }"
           class="sidebar__item-name"
@@ -19,9 +20,7 @@ import { sideBarUiAdmin } from "../../data/MyData";
 
 export default {
   name: "SideBar",
-  props: {
-    sideBars: {},
-  },
+  props: {},
   setup() {
     return { sideBarUiAdmin };
   },

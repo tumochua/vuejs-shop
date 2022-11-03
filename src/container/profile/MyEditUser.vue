@@ -27,11 +27,24 @@
     </div>
     <div>
       <LableVue>Gender</LableVue>
-      <MySelectVue :width="true" :value="userEdit.gender"></MySelectVue>
+      <MySelectVue
+        :width="true"
+        :datas="dataSex"
+        @onChangeValue="handleInput"
+        name="genderId"
+        :value="userEdit.genderId"
+      >
+      </MySelectVue>
     </div>
     <div>
       <LableVue>Admin</LableVue>
-      <MySelectVue :width="true" :value="userEdit.admin"></MySelectVue>
+      <MySelectVue
+        :width="true"
+        :datas="dataRole"
+        @onChangeValue="handleInput"
+        name="positionId"
+        :value="userEdit.positionId"
+      ></MySelectVue>
     </div>
     <ButtonVue class="btn-update" @onClickEvent="handleUpdate"
       >Update</ButtonVue
@@ -62,17 +75,63 @@ export default {
     const userEdit = ref(null);
     const inputUser = reactive({
       id: route.params.id,
-      firstName: "",
-      lastName: "",
-      address: "",
-      gender: "",
-      admin: "",
+      firstName: null,
+      lastName: null,
+      address: null,
+      genderId: "F",
+      positionId: "0",
     });
+
+    const dataSex = reactive([
+      {
+        id: 1,
+        name: "Female",
+        value: "F",
+      },
+      {
+        id: 2,
+        name: "Male",
+        value: "M",
+      },
+      {
+        id: 3,
+        name: "Other",
+        value: "O",
+      },
+    ]);
+
+    const dataRole = reactive([
+      {
+        id: 1,
+        name: "User",
+        value: 0,
+      },
+      {
+        id: 2,
+        name: "Salesman",
+        value: 1,
+      },
+      {
+        id: 3,
+        name: "Shipper",
+        value: 2,
+      },
+      {
+        id: 4,
+        name: "Admin",
+        value: 5,
+      },
+    ]);
 
     async function getUserDetail() {
       const user = await handleGetDetailUser(route.params.id);
       userEdit.value = user.data.data;
-      console.log(userEdit.value);
+      // console.log(userEdit.value);
+      inputUser.firstName = userEdit.value.firstName;
+      inputUser.lastName = userEdit.value.lastName;
+      inputUser.address = userEdit.value.address;
+      inputUser.genderId = userEdit.value.genderId;
+      inputUser.positionId = userEdit.value.positionId;
     }
     getUserDetail();
     const handleInput = (data) => {
@@ -86,7 +145,7 @@ export default {
       router.push({ name: "MyUsers", params: { id: page } });
     };
 
-    return { userEdit, handleInput, handleUpdate };
+    return { userEdit, dataSex, dataRole, handleInput, handleUpdate };
   },
 };
 </script>

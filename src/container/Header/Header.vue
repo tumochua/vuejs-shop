@@ -321,10 +321,14 @@ export default {
         : "";
     });
     const handleAdmin = () => {
-      if (newObject) {
-        console.log("check me");
+      if (+newObject.data.positionId === 5) {
         router.push({
           name: "ProfileUser",
+          params: { id: newObject.data.id },
+        });
+      } else {
+        router.push({
+          name: "MyUsersProFile",
           params: { id: newObject.data.id },
         });
       }

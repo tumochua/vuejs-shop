@@ -16,7 +16,7 @@
 
 <script>
 import { useRoute } from "vue-router";
-import { computed, onMounted } from "vue";
+import { computed, onMounted, onBeforeUnmount } from "vue";
 // import img from '../../assets/admin/sidebar/dashboard.png'
 import SalesSummary from "./SalesSummary.vue";
 import SideBar from "./SideBar.vue";
@@ -37,7 +37,10 @@ export default {
     const route = useRoute();
 
     onMounted(() => {
-      console.log(route.params);
+      // console.log(route.params);
+    });
+    onBeforeUnmount(() => {
+      // console.log("onBeforeUnmount()");
     });
     const idRoute = computed(() => {
       return route.params;

@@ -15,10 +15,15 @@
         <p class="toast__description">Delete User successful</p>
       </div>
     </ToastVue>
-    <form class="user__body grid">
-      <ButtonVue @onClickEvent="handleClick" :padding="false"
-        >Add New User</ButtonVue
-      >
+    <div class="user__body grid">
+      <div>
+        <ButtonVue @onClickEvent="handleClick" :padding="false"
+          >Add New User</ButtonVue
+        >
+      </div>
+      <div class="input__seach">
+        <InputVue placeholder="seach.." />
+      </div>
       <MyModel :isShow="isShow" @handleHideModal="handleHideModal">
         <template v-slot:header>
           <h1 class="modal-header">Create New Users</h1>
@@ -73,7 +78,7 @@
                   :width="true"
                   :value="userData.gender"
                   @onChangeValue="handleInput"
-                  name="gender"
+                  name="genderId"
                   :datas="dataSex"
                 ></MySelect>
               </div>
@@ -83,7 +88,7 @@
                   :width="true"
                   :value="userData.admin"
                   @onChangeValue="handleInput"
-                  name="admin"
+                  name="positionId"
                   :datas="dataRole"
                 ></MySelect>
               </div>
@@ -120,9 +125,7 @@
           </div>
         </template>
       </MyModel>
-      <div>
-        <InputVue placeholder="seach" />
-      </div>
+
       <MyAllUsers
         class="all__user__wapper"
         :dataAllUsers="dataAllUsers"
@@ -132,7 +135,7 @@
         @hanldeDelete="hanldeDelete"
         @handleShowModalEdit="handleShowModalEdit"
       ></MyAllUsers>
-    </form>
+    </div>
   </div>
 </template>
 
@@ -175,8 +178,8 @@ export default {
       email: "",
       password: "",
       address: "",
-      gender: "",
-      admin: "",
+      genderId: "F",
+      positionId: "0",
     });
     const userEdit = ref(null);
     const isShow = ref(false);
@@ -194,35 +197,41 @@ export default {
     const dataSex = reactive([
       {
         id: 1,
-        name: "Male",
-        value: 0,
+        name: "Female",
+        value: "F",
       },
       {
         id: 2,
-        name: "Female",
-        value: 1,
+        name: "Male",
+        value: "M",
       },
       {
         id: 3,
         name: "Other",
-        value: 2,
+        value: "O",
       },
     ]);
+
     const dataRole = reactive([
       {
         id: 1,
-        name: "Admin",
-        value: 5,
+        name: "User",
+        value: 0,
       },
       {
         id: 2,
-        name: "Shipper",
-        value: 4,
+        name: "Salesman",
+        value: 1,
       },
       {
         id: 3,
-        name: "User",
-        value: 3,
+        name: "Shipper",
+        value: 2,
+      },
+      {
+        id: 4,
+        name: "Admin",
+        value: 5,
       },
     ]);
 
@@ -247,6 +256,7 @@ export default {
       handleShowHideModal();
 
       if (register) {
+        console.log(userData);
         await handleApiRegister(userData);
         watchAllUsers.value = !watchAllUsers.value;
       }
@@ -342,6 +352,12 @@ export default {
     background: #21222d;
   }
   .user__body {
+    .input__seach {
+      width: 20%;
+      float: right;
+      margin-bottom: 3x;
+      margin-right: 3px;
+    }
     .modal-header {
       text-align: center;
     }
@@ -353,6 +369,7 @@ export default {
         gap: 10px;
         margin-bottom: 3px;
         .modal__body-select--wapper {
+          width: 100%;
         }
       }
       .all__user__wapper {

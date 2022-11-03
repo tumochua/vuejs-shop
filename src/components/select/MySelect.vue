@@ -5,13 +5,14 @@
     :class="{ 'full-width': width }"
     @change="onChangeSelect"
   >
-    <option :value="value">
-      {{ value }}
+    <option v-for="data in datas" :key="data" :value="data.value">
+      {{ data.name }}
     </option>
   </select>
 </template>
 
 <script>
+import { computed } from "vue";
 export default {
   name: "MySelect",
   props: {
@@ -29,11 +30,15 @@ export default {
     },
   },
   setup({ name, value }, { emit }) {
-    console.log("value", value);
     const onChangeSelect = (e) => {
       emit("onChangeValue", { name: name, value: e.target.value });
     };
-    return { onChangeSelect };
+
+    const isValue = computed(() => {
+      return !value ? "" : value;
+    });
+
+    return { onChangeSelect, isValue };
   },
 };
 </script>

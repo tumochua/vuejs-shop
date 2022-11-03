@@ -152,7 +152,7 @@ const sideBarUiAdmin = [
     icon: require("@/assets/admin/sidebar/dashboard.png"),
     routerLinks: {
       name: "ProfileUser",
-      params: {},
+      params: { id: 1 },
     },
   },
   {
@@ -161,7 +161,7 @@ const sideBarUiAdmin = [
     icon: require("@/assets/admin/sidebar/profile.png"),
     routerLinks: {
       name: "MyUsers",
-      params: {},
+      params: { id: 1 },
     },
   },
   {
@@ -170,7 +170,7 @@ const sideBarUiAdmin = [
     icon: require("@/assets/admin/sidebar/leaderboard.png"),
     routerLinks: {
       name: "MyLeaderboard",
-      params: {},
+      params: { id: 1 },
     },
   },
   {
@@ -179,7 +179,7 @@ const sideBarUiAdmin = [
     icon: require("@/assets/admin/sidebar/order.png"),
     routerLinks: {
       name: "MyOrders",
-      params: {},
+      params: { id: 1 },
     },
   },
   {
@@ -188,7 +188,7 @@ const sideBarUiAdmin = [
     icon: require("@/assets/admin/sidebar/product.png"),
     routerLinks: {
       name: "MyProducts",
-      params: {},
+      params: { id: 1 },
     },
   },
   {
@@ -197,7 +197,7 @@ const sideBarUiAdmin = [
     icon: require("@/assets/admin/sidebar/sales-report.png"),
     routerLinks: {
       name: "MySalesReport",
-      params: {},
+      params: { id: 1 },
     },
   },
   {
@@ -206,7 +206,7 @@ const sideBarUiAdmin = [
     icon: require("@/assets/admin/sidebar/message.png"),
     routerLinks: {
       name: "MyMessage",
-      params: {},
+      params: { id: 1 },
     },
   },
   {
@@ -215,7 +215,7 @@ const sideBarUiAdmin = [
     icon: require("@/assets/admin/sidebar/settings.png"),
     routerLinks: {
       name: "MySettings",
-      params: {},
+      params: { id: 1 },
     },
   },
   {
@@ -224,7 +224,7 @@ const sideBarUiAdmin = [
     icon: require("@/assets/admin/sidebar/favourite.png"),
     routerLinks: {
       name: "MyFavourite",
-      params: {},
+      params: { id: 1 },
     },
   },
   {
@@ -233,7 +233,7 @@ const sideBarUiAdmin = [
     icon: require("@/assets/admin/sidebar/history.png"),
     routerLinks: {
       name: "MyHistory",
-      params: {},
+      params: { id: 1 },
     },
   },
   {
@@ -242,7 +242,7 @@ const sideBarUiAdmin = [
     icon: require("@/assets/admin/sidebar/logout.png"),
     routerLinks: {
       name: "MySignout",
-      params: {},
+      params: { id: 1 },
     },
   },
 ];

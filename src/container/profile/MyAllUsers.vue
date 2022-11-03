@@ -3,15 +3,23 @@
     <table>
       <thead>
         <tr>
-          <th v-for="column in columns" :key="column.id">{{ column.name }}</th>
-          <th>Actions</th>
+          <th>ID</th>
+          <th>First Name</th>
+          <th>Last Name</th>
+          <th>Address</th>
+          <th>Gender</th>
+          <th>Position</th>
+          <th>Action</th>
         </tr>
       </thead>
       <tbody v-if="dataAllUsers">
         <tr v-for="item in dataAllUsers.data.data" :key="item.id">
-          <td v-for="column in columns" :key="column.id">
-            {{ item[column.name] || "chưa có dứ liệu" }}
-          </td>
+          <th>{{ item.id }}</th>
+          <th>{{ item.firstName }}</th>
+          <th>{{ item.lastName }}</th>
+          <th>{{ item.address }}</th>
+          <th>{{ item.genderData.valueEn }}</th>
+          <th>{{ item.positionData.valueEn }}</th>
           <th>
             <div class="table-action">
               <i
@@ -45,7 +53,7 @@
 </template>
 
 <script>
-import { reactive, ref, watch, computed, onMounted, onUpdated } from "vue";
+import { ref, watch, computed, onMounted, onUpdated } from "vue";
 // import { handleGetPagingListUsers } from "../../api/index";
 import { useRouter } from "vue-router";
 import ButtonVue from "@/components/button/Button.vue";
@@ -66,35 +74,9 @@ export default {
     },
   },
   setup({ dataAllUsers }, { emit }) {
+    // console.log(dataAllUsers);
     const router = useRouter();
     const activeItem = ref(0);
-
-    const columns = reactive([
-      {
-        id: 1,
-        name: "id",
-      },
-      {
-        id: 2,
-        name: "firstName",
-      },
-      {
-        id: 3,
-        name: "lastName",
-      },
-      {
-        id: 4,
-        name: "address",
-      },
-      {
-        id: 5,
-        name: "gender",
-      },
-      {
-        id: 6,
-        name: "admin",
-      },
-    ]);
 
     const handleCheckUsers = computed(() => {
       return dataAllUsers ? dataAllUsers.data.data : [];
@@ -130,7 +112,6 @@ export default {
 
     return {
       activeItem,
-      columns,
       handleCheckUsers,
       hanldeChangePage,
       hanldeDelete,

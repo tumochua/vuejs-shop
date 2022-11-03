@@ -22,6 +22,8 @@ import MyFavourite from "./container/profile/MyFavourite.vue";
 import MyHistory from "./container/profile/MyHistory.vue";
 import MySignout from "./container/profile/MySignout.vue";
 
+import MyUsersProFile from "./container/users/MyUsersProFile.vue";
+
 import NotFound from "./NotFound/NotFound.vue";
 import { createRouter, createWebHistory } from "vue-router";
 import Cookies from "js-cookie";
@@ -44,7 +46,7 @@ const routes = [
     beforeEnter(to, from, next) {
       // console.log("to", to);
       // console.log("from", from);
-      const checkToken = Cookies.get("token");
+      const checkToken = handleCheckToken();
       if (checkToken) {
         next();
       } else {
@@ -59,7 +61,7 @@ const routes = [
     beforeEnter(to, from, next) {
       // console.log("to", to);
       // console.log("from", from);
-      const checkToken = Cookies.get("token");
+      const checkToken = handleCheckToken();
       if (checkToken) {
         next();
       } else {
@@ -74,8 +76,14 @@ const routes = [
     beforeEnter(to, from, next) {
       // console.log("to", to);
       // console.log("from", from);
-      const checkToken = Cookies.get("token");
+      const checkToken = handleCheckToken();
+      const checkRole = handleCheckRoleShipper();
       if (checkToken) {
+        if (checkRole) {
+          next();
+        } else {
+          next("/");
+        }
         next();
       } else {
         next("/login");
@@ -89,8 +97,14 @@ const routes = [
     beforeEnter(to, from, next) {
       // console.log("to", to);
       // console.log("from", from);
-      const checkToken = Cookies.get("token");
+      const checkToken = handleCheckToken();
+      const checkRole = handleCheckSalesman();
       if (checkToken) {
+        if (checkRole) {
+          next();
+        } else {
+          next("/login");
+        }
         next();
       } else {
         next("/login");
@@ -103,21 +117,40 @@ const routes = [
     name: "ProfileUser",
     component: ProfileUser,
     beforeEnter(to, from, next) {
-      // const checkToken = Cookies.get("token");
-      // if (checkToken) {
-      //   next();
-      // } else {
-      //   next("/login");
-      // }
-      if (
-        JSON.parse(localStorage.getItem("user")) &&
-        JSON.parse(localStorage.getItem("user")).data.admin === 5
-      ) {
+      const checkRole = handleCheckRoleAdmin();
+
+      const checkToken = handleCheckToken();
+      if (checkToken) {
+        if (checkRole) {
+          next();
+        } else {
+          next("/");
+        }
         next();
       } else {
-        next("/");
+        next("/login");
       }
     },
+  },
+  {
+    path: "/profile/users/:id",
+    name: "MyUsersProFile",
+    component: MyUsersProFile,
+    // beforeEnter(to, from, next) {
+    //   const checkRole = handleCheckRoleAdmin();
+
+    //   const checkToken = handleCheckToken();
+    //   if (checkToken) {
+    //     if (checkRole) {
+    //       next();
+    //     } else {
+    //       next("/");
+    //     }
+    //     next();
+    //   } else {
+    //     next("/login");
+    //   }
+    // },
   },
 
   {
@@ -125,19 +158,17 @@ const routes = [
     name: "MyUsers",
     component: MyUsers,
     beforeEnter(to, from, next) {
-      // const checkToken = Cookies.get("token");
-      // if (checkToken) {
-      //   next();
-      // } else {
-      //   next("/login");
-      // }
-      if (
-        JSON.parse(localStorage.getItem("user")) &&
-        JSON.parse(localStorage.getItem("user")).data.admin === 5
-      ) {
+      const checkRole = handleCheckRoleAdmin();
+      const checkToken = handleCheckToken();
+      if (checkToken) {
+        if (checkRole) {
+          next();
+        } else {
+          next("/");
+        }
         next();
       } else {
-        next("/");
+        next("/login");
       }
     },
   },
@@ -147,19 +178,17 @@ const routes = [
     name: "MyEditUser",
     component: MyEditUser,
     beforeEnter(to, from, next) {
-      // const checkToken = Cookies.get("token");
-      // if (checkToken) {
-      //   next();
-      // } else {
-      //   next("/login");
-      // }
-      if (
-        JSON.parse(localStorage.getItem("user")) &&
-        JSON.parse(localStorage.getItem("user")).data.admin === 5
-      ) {
+      const checkRole = handleCheckRoleAdmin();
+      const checkToken = handleCheckToken();
+      if (checkToken) {
+        if (checkRole) {
+          next();
+        } else {
+          next("/");
+        }
         next();
       } else {
-        next("/");
+        next("/login");
       }
     },
   },
@@ -169,19 +198,17 @@ const routes = [
     name: "MyLeaderboard",
     component: MyLeaderboard,
     beforeEnter(to, from, next) {
-      // const checkToken = Cookies.get("token");
-      // if (checkToken) {
-      //   next();
-      // } else {
-      //   next("/login");
-      // }
-      if (
-        JSON.parse(localStorage.getItem("user")) &&
-        JSON.parse(localStorage.getItem("user")).data.admin === 5
-      ) {
+      const checkRole = handleCheckRoleAdmin();
+      const checkToken = handleCheckToken();
+      if (checkToken) {
+        if (checkRole) {
+          next();
+        } else {
+          next("/");
+        }
         next();
       } else {
-        next("/");
+        next("/login");
       }
     },
   },
@@ -190,19 +217,17 @@ const routes = [
     name: "MyOrders",
     component: MyOrders,
     beforeEnter(to, from, next) {
-      // const checkToken = Cookies.get("token");
-      // if (checkToken) {
-      //   next();
-      // } else {
-      //   next("/login");
-      // }
-      if (
-        JSON.parse(localStorage.getItem("user")) &&
-        JSON.parse(localStorage.getItem("user")).data.admin === 5
-      ) {
+      const checkRole = handleCheckRoleAdmin();
+      const checkToken = handleCheckToken();
+      if (checkToken) {
+        if (checkRole) {
+          next();
+        } else {
+          next("/");
+        }
         next();
       } else {
-        next("/");
+        next("/login");
       }
     },
   },
@@ -211,19 +236,17 @@ const routes = [
     name: "MyProducts",
     component: MyProducts,
     beforeEnter(to, from, next) {
-      // const checkToken = Cookies.get("token");
-      // if (checkToken) {
-      //   next();
-      // } else {
-      //   next("/login");
-      // }
-      if (
-        JSON.parse(localStorage.getItem("user")) &&
-        JSON.parse(localStorage.getItem("user")).data.admin === 5
-      ) {
+      const checkRole = handleCheckRoleAdmin();
+      const checkToken = handleCheckToken();
+      if (checkToken) {
+        if (checkRole) {
+          next();
+        } else {
+          next("/");
+        }
         next();
       } else {
-        next("/");
+        next("/login");
       }
     },
   },
@@ -232,19 +255,17 @@ const routes = [
     name: "MySalesReport",
     component: MySalesReport,
     beforeEnter(to, from, next) {
-      // const checkToken = Cookies.get("token");
-      // if (checkToken) {
-      //   next();
-      // } else {
-      //   next("/login");
-      // }
-      if (
-        JSON.parse(localStorage.getItem("user")) &&
-        JSON.parse(localStorage.getItem("user")).data.admin === 5
-      ) {
+      const checkRole = handleCheckRoleAdmin();
+      const checkToken = handleCheckToken();
+      if (checkToken) {
+        if (checkRole) {
+          next();
+        } else {
+          next("/");
+        }
         next();
       } else {
-        next("/");
+        next("/login");
       }
     },
   },
@@ -253,19 +274,17 @@ const routes = [
     name: "MyMessage",
     component: MyMessage,
     beforeEnter(to, from, next) {
-      // const checkToken = Cookies.get("token");
-      // if (checkToken) {
-      //   next();
-      // } else {
-      //   next("/login");
-      // }
-      if (
-        JSON.parse(localStorage.getItem("user")) &&
-        JSON.parse(localStorage.getItem("user")).data.admin === 5
-      ) {
+      const checkRole = handleCheckRoleAdmin();
+      const checkToken = handleCheckToken();
+      if (checkToken) {
+        if (checkRole) {
+          next();
+        } else {
+          next("/");
+        }
         next();
       } else {
-        next("/");
+        next("/login");
       }
     },
   },
@@ -274,19 +293,17 @@ const routes = [
     name: "MySettings",
     component: MySettings,
     beforeEnter(to, from, next) {
-      // const checkToken = Cookies.get("token");
-      // if (checkToken) {
-      //   next();
-      // } else {
-      //   next("/login");
-      // }
-      if (
-        JSON.parse(localStorage.getItem("user")) &&
-        JSON.parse(localStorage.getItem("user")).data.admin === 5
-      ) {
+      const checkRole = handleCheckRoleAdmin();
+      const checkToken = handleCheckToken();
+      if (checkToken) {
+        if (checkRole) {
+          next();
+        } else {
+          next("/");
+        }
         next();
       } else {
-        next("/");
+        next("/login");
       }
     },
   },
@@ -295,19 +312,17 @@ const routes = [
     name: "MyFavourite",
     component: MyFavourite,
     beforeEnter(to, from, next) {
-      // const checkToken = Cookies.get("token");
-      // if (checkToken) {
-      //   next();
-      // } else {
-      //   next("/login");
-      // }
-      if (
-        JSON.parse(localStorage.getItem("user")) &&
-        JSON.parse(localStorage.getItem("user")).data.admin === 5
-      ) {
+      const checkRole = handleCheckRoleAdmin();
+      const checkToken = handleCheckToken();
+      if (checkToken) {
+        if (checkRole) {
+          next();
+        } else {
+          next("/");
+        }
         next();
       } else {
-        next("/");
+        next("/login");
       }
     },
   },
@@ -316,19 +331,17 @@ const routes = [
     name: "MyHistory",
     component: MyHistory,
     beforeEnter(to, from, next) {
-      // const checkToken = Cookies.get("token");
-      // if (checkToken) {
-      //   next();
-      // } else {
-      //   next("/login");
-      // }
-      if (
-        JSON.parse(localStorage.getItem("user")) &&
-        JSON.parse(localStorage.getItem("user")).data.admin === 5
-      ) {
+      const checkRole = handleCheckRoleAdmin();
+      const checkToken = handleCheckToken();
+      if (checkToken) {
+        if (checkRole) {
+          next();
+        } else {
+          next("/");
+        }
         next();
       } else {
-        next("/");
+        next("/login");
       }
     },
   },
@@ -337,33 +350,20 @@ const routes = [
     name: "MySignout",
     component: MySignout,
     beforeEnter(to, from, next) {
-      // const checkToken = Cookies.get("token");
-      // if (checkToken) {
-      //   next();
-      // } else {
-      //   next("/login");
-      // }
-      if (
-        JSON.parse(localStorage.getItem("user")) &&
-        JSON.parse(localStorage.getItem("user")).data.admin === 5
-      ) {
+      const checkRole = handleCheckRoleAdmin();
+      const checkToken = handleCheckToken();
+      if (checkToken) {
+        if (checkRole) {
+          next();
+        } else {
+          next("/");
+        }
         next();
       } else {
-        next("/");
+        next("/login");
       }
     },
   },
-
-  // {
-  //   path: '/news',
-  //   name: 'news',
-  //   component: News,
-  //   children: [{
-  //     path: ':id',
-  //     name: 'newsitem',
-  //     component: Newsitem,
-  //   }]
-  // },
 
   { path: "/:pathMatch(.*)*", name: "NotFound", component: NotFound },
 ];
@@ -375,5 +375,30 @@ const router = createRouter({
 //   console.log("beforeEach");
 //   next();
 // });
+const number =
+  JSON.parse(localStorage.getItem("user")) &&
+  JSON.parse(localStorage.getItem("user")).data.positionId;
+const roleCookies = Cookies.get("token");
+
+function handleCheckToken() {
+  return roleCookies ? true : false;
+}
+
+function handleCheckRoleAdmin() {
+  const roleLocal = +number === 5;
+  // console.log("roleLocal", roleLocal);
+  return roleLocal ? true : false;
+}
+
+function handleCheckRoleShipper() {
+  const roleLocal = +number >= 2;
+  return roleLocal ? true : false;
+}
+
+function handleCheckSalesman() {
+  const roleLocal = +number >= 1;
+
+  return roleLocal ? true : false;
+}
 
 export default router;
