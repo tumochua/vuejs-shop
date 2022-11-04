@@ -70,8 +70,8 @@ const routes = [
     },
   },
   {
-    path: "/shipper",
-    name: "shipper",
+    path: "/shipper/:id",
+    name: "Shipper",
     component: MyShipper,
     beforeEnter(to, from, next) {
       // console.log("to", to);
@@ -91,7 +91,7 @@ const routes = [
     },
   },
   {
-    path: "/salesman",
+    path: "/salesman/:id",
     name: "Salesman",
     component: MySalesman,
     beforeEnter(to, from, next) {
@@ -103,7 +103,7 @@ const routes = [
         if (checkRole) {
           next();
         } else {
-          next("/login");
+          next("/");
         }
         next();
       } else {
@@ -136,21 +136,14 @@ const routes = [
     path: "/profile/users/:id",
     name: "MyUsersProFile",
     component: MyUsersProFile,
-    // beforeEnter(to, from, next) {
-    //   const checkRole = handleCheckRoleAdmin();
-
-    //   const checkToken = handleCheckToken();
-    //   if (checkToken) {
-    //     if (checkRole) {
-    //       next();
-    //     } else {
-    //       next("/");
-    //     }
-    //     next();
-    //   } else {
-    //     next("/login");
-    //   }
-    // },
+    beforeEnter(to, from, next) {
+      const checkToken = handleCheckToken();
+      if (checkToken) {
+        next();
+      } else {
+        next("/login");
+      }
+    },
   },
 
   {
@@ -391,12 +384,12 @@ function handleCheckRoleAdmin() {
 }
 
 function handleCheckRoleShipper() {
-  const roleLocal = +number >= 2;
+  const roleLocal = +number === 2;
   return roleLocal ? true : false;
 }
 
 function handleCheckSalesman() {
-  const roleLocal = +number >= 1;
+  const roleLocal = +number === 1;
 
   return roleLocal ? true : false;
 }
