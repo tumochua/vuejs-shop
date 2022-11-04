@@ -12,7 +12,7 @@ export default {
       type: Number,
       required: true,
       default() {
-        return 1.2;
+        return 1.3;
       },
     },
   },

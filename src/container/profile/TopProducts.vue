@@ -18,7 +18,11 @@
     </div>
     <div class="production__line">
       <div>
-        <MyChart :data="data" type="line" :options="options"></MyChart>
+        <MyChart
+          :data="topProduction.data"
+          type="line"
+          :options="topProduction.options"
+        ></MyChart>
       </div>
       <div class="production__line-foot-wapper">
         <div class="production-foot-date">
@@ -44,13 +48,14 @@
 import { reactive } from "vue";
 
 import MyChart from "./MyChart.vue";
+
+import { topProduction } from "../../data/MyData";
 export default {
   name: "TopProducts",
   components: {
     MyChart,
   },
   setup() {
-    // const topTitleProducts = reactive(["#", "name", "Popularity", "Sales"]);
     const topTitleProducts = reactive([
       {
         id: 1,
@@ -96,40 +101,7 @@ export default {
       },
     ]);
 
-    const data = reactive({
-      labels: [
-        "Tokyo",
-        "Mumbai",
-        "Mexico City",
-        "Shanghai",
-        "Sao Paulo",
-        "New York",
-        "Karachi",
-      ],
-      datasets: [
-        {
-          label: "Series 1", // Name the series
-          data: [500, 50, 2424, 14040, 14141, 4111, 4544], // Specify the data values array
-          fill: true,
-          borderColor: "#2196f3", // Add custom color border (Line)
-          backgroundColor: "#2196f3", // Add custom color background (Points and Fill)
-          borderWidth: 1, // Specify bar border width
-        },
-        {
-          label: "Series 2", // Name the series
-          data: [1288, 88942, 44545, 7588, 99, 242, 1417], // Specify the data values array
-          fill: true,
-          borderColor: "#4CAF50", // Add custom color border (Line)
-          backgroundColor: "#4CAF50", // Add custom color background (Points and Fill)
-          borderWidth: 1, // Specify bar border width
-        },
-      ],
-    });
-    const options = reactive({
-      responsive: true, // Instruct chart js to respond nicely.
-      maintainAspectRatio: false, // Add to prevent default behaviour of full-width/height
-    });
-    return { topTitleProducts, listProducts, data, options };
+    return { topTitleProducts, listProducts, topProduction };
   },
 };
 </script>

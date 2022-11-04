@@ -1,19 +1,28 @@
 <template>
   <div class="admin__body-sidebar">
-    <ul v-for="sideBar in sideBars" :key="sideBar.id">
+    <ul v-for="sideBar in sideBarUiAdmin" :key="sideBar.id">
       <li class="sidebar__item">
         <img :src="sideBar.icon" class="sidebar__item-icon" />
-        <span class="sidebar__item-name">{{ sideBar.name }}</span>
+        <!-- <span class="sidebar__item-name">{{ sideBar.name }}</span> -->
+        <!-- :params="sideBar.params.id" -->
+        <router-link
+          :to="{ name: sideBar.routerLinks.name }"
+          class="sidebar__item-name"
+          >{{ sideBar.name }}</router-link
+        >
       </li>
     </ul>
   </div>
 </template>
 
 <script>
+import { sideBarUiAdmin } from "../../data/MyData";
+
 export default {
   name: "SideBar",
-  props: {
-    sideBars: {},
+  props: {},
+  setup() {
+    return { sideBarUiAdmin };
   },
 };
 </script>
@@ -29,9 +38,6 @@ export default {
     color: #171821;
   }
   .sidebar__item {
-    .sidebar__item-icon {
-      color: #000000;
-    }
     padding: 10px 14px;
     list-style: none;
     margin-bottom: 5px;
@@ -41,6 +47,11 @@ export default {
     align-items: center;
     .sidebar__item-icon {
       margin-right: 10px;
+      color: #000000;
+    }
+    .sidebar__item-name {
+      color: #87888c;
+      text-decoration: none;
     }
   }
 }

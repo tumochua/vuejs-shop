@@ -29,7 +29,11 @@
     <div class="body__content-rigth">
       <h2>Level</h2>
       <div class="colum__wapper">
-        <MyChart :data="data" type="bar" :options="options"></MyChart>
+        <MyChart
+          :data="todaysSales.data"
+          type="bar"
+          :options="todaysSales.options"
+        ></MyChart>
       </div>
       <div class="colum__wapper--botton">
         <div class="colum__wapper--botton--voloum">
@@ -46,63 +50,16 @@
 <script>
 import MyChart from "./MyChart.vue";
 
-import { reactive } from "vue";
+import { todaysSales, salesSummarys } from "../../data/MyData";
 
 export default {
   name: "SalesSummary",
   components: {
     MyChart,
   },
-  props: {
-    salesSummarys: {},
-  },
+  props: {},
   setup() {
-    const labels = reactive([
-      // "Janunary",
-      // "February",
-      // "March",
-      // "April",
-      // "May",
-      // "June",
-      // "July",
-    ]);
-
-    const data = reactive({
-      labels: ["Red", "Blue", "Yellow", "Green", "Purple", "Orange"],
-      datasets: [
-        {
-          label: "# of Votes",
-          data: [12, 19, 3, 5, 2, 3],
-          backgroundColor: [
-            "rgba(255, 99, 132, 0.2)",
-            "rgba(54, 162, 235, 0.2)",
-            "rgba(255, 206, 86, 0.2)",
-            "rgba(75, 192, 192, 0.2)",
-            "rgba(153, 102, 255, 0.2)",
-            "rgba(255, 159, 64, 0.2)",
-          ],
-          borderColor: [
-            "rgba(255, 99, 132, 1)",
-            "rgba(54, 162, 235, 1)",
-            "rgba(255, 206, 86, 1)",
-            "rgba(75, 192, 192, 1)",
-            "rgba(153, 102, 255, 1)",
-            "rgba(255, 159, 64, 1)",
-          ],
-          borderWidth: 1,
-        },
-      ],
-    });
-
-    const options = reactive({
-      scales: {
-        y: {
-          beginAtZero: true,
-        },
-      },
-    });
-
-    return { labels, data, options };
+    return { todaysSales, salesSummarys };
   },
 };
 </script>

@@ -1,16 +1,16 @@
 <template>
-  <div>
-    <input
-      class="base__input"
-      :placeholder="placeholder"
-      :value="value"
-      @input="onChangeValue"
-      :type="type"
-      :class="{
-        'error-border': errorInput,
-      }"
-    />
-  </div>
+  <input
+    class="base__input"
+    :placeholder="placeholder"
+    :disabled="isDisabled"
+    :value="value"
+    @input="onChangeValue"
+    :type="type"
+    :class="{
+      'error-border': errorInput,
+      'is-disabled': isDisabled,
+    }"
+  />
 </template>
 
 <script>
@@ -48,6 +48,7 @@ export default {
         return false;
       },
     },
+
     // showHidlePasworld: {
     //   type: Boolean,
     // },
@@ -77,6 +78,9 @@ export default {
 }
 .error-border {
   border: 1px solid var(--colers);
+}
+.is-disabled {
+  cursor: no-drop;
 }
 .input__wapper {
   // position: relative;

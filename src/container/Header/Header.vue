@@ -321,10 +321,28 @@ export default {
         : "";
     });
     const handleAdmin = () => {
-      if (newObject) {
-        console.log("check me");
+      if (+newObject.data.positionId === 5) {
         router.push({
           name: "ProfileUser",
+          params: { id: newObject.data.id },
+        });
+      }
+
+      if (+newObject.data.positionId === 2) {
+        router.push({
+          name: "Shipper",
+          params: { id: newObject.data.id },
+        });
+      }
+      if (+newObject.data.positionId === 1) {
+        router.push({
+          name: "Salesman",
+          params: { id: newObject.data.id },
+        });
+      }
+      if (+newObject.data.positionId === 0) {
+        router.push({
+          name: "MyUsersProFile",
           params: { id: newObject.data.id },
         });
       }
