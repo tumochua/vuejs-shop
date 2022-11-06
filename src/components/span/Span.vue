@@ -1,6 +1,5 @@
 <template>
   <span
-    :style="{ fontSize: fontSize + 'rem' }"
     :class="{
       coler: coler,
     }"
@@ -17,7 +16,7 @@ export default {
       type: Number,
       required: true,
       default() {
-        return 1;
+        return 1.2;
       },
     },
     coler: {
@@ -30,5 +29,6 @@ export default {
 <style scoped lang="scss">
 .coler {
   color: var(--colers);
+  font-size: 1.2rem;
 }
 </style>

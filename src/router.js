@@ -10,6 +10,7 @@ import MyShipper from "./container/shipper/MyShipper.vue";
 
 import MySalesman from "./container/salesman/MySalesman.vue";
 import MyProduction from "./container/salesman/MyProduction.vue";
+import MyDetailProduct from "./container/product/MyDetailProduct.vue";
 
 import ProfileUser from "./container/profile/ProfileUser.vue";
 import MyUsers from "./container/profile/MyUsers.vue";
@@ -92,6 +93,7 @@ const routes = [
       }
     },
   },
+
   {
     path: "/salesman/:id",
     name: "Salesman",
@@ -113,6 +115,7 @@ const routes = [
       }
     },
   },
+
   {
     path: "/production/users/:id",
     name: "Production",
@@ -133,6 +136,28 @@ const routes = [
         next("/login");
       }
     },
+  },
+
+  {
+    path: "/detail/production/:id",
+    name: "DetailProduct",
+    component: MyDetailProduct,
+    // beforeEnter(to, from, next) {
+    //   // console.log("to", to);
+    //   // console.log("from", from);
+    //   const checkToken = handleCheckToken();
+    //   const checkRole = handleCheckSalesman();
+    //   if (checkToken) {
+    //     if (checkRole) {
+    //       next();
+    //     } else {
+    //       next("/");
+    //     }
+    //     next();
+    //   } else {
+    //     next("/login");
+    //   }
+    // },
   },
 
   {
