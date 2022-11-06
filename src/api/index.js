@@ -64,6 +64,10 @@ const handleGetAllProduct = () => {
   return api.get("/api-get-products");
 };
 
+const handleGetDetailProduct = (id) => {
+  return api.get(`/api-get-detail-products?id=${id}`);
+};
+
 export {
   getHome,
   handleApiRegister,
@@ -80,4 +84,5 @@ export {
   handleGetDetailUser,
   handleCreateProduct,
   handleGetAllProduct,
+  handleGetDetailProduct,
 };
