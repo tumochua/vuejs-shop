@@ -36,7 +36,6 @@ export default {
 <style>
 #app {
   font-family: "Roboto", sans-serif;
-
   height: 500px;
 }
 :root {
@@ -49,10 +48,12 @@ export default {
   --btn-color: #ee4d2d;
   --colers: #ee4d2d;
   --color-primary: rgb(45, 164, 79);
+  --color-border-focus-visible: #0969da;
 }
 html {
   font-size: 62.5%;
-  line-height: 16px;
+}
+body {
 }
 * {
   margin: 0;

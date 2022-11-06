@@ -10,6 +10,7 @@
         :slideRight="slideRight"
       ></Carousel>
     </div>
+    <MyBodyVue class="body-container grid" />
     <FooterVue></FooterVue>
   </div>
 </template>
@@ -18,6 +19,7 @@
 import Carousel from "@/components/slick/Carousel.vue";
 import HeaderVue from "@/container/Header/Header.vue";
 import FooterVue from "@/container/footer/Footer.vue";
+import MyBodyVue from "../body/MyBody.vue";
 import { reactive, onMounted } from "vue";
 export default {
   name: "HomeVue",
@@ -25,6 +27,7 @@ export default {
     Carousel,
     HeaderVue,
     FooterVue,
+    MyBodyVue,
   },
   setup() {
     const slideseft = reactive([
@@ -58,6 +61,11 @@ export default {
 
 <style scoped lang="scss">
 .grid {
+  margin-top: 30px;
+}
+.body-container {
+  border-top: 4px solid var(--colers);
+  margin-bottom: 30px;
   margin-top: 30px;
 }
 </style>
