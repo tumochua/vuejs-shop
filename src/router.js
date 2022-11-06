@@ -7,7 +7,9 @@ import PrivateVue from "@/views/private/Private.vue";
 import FromTest from "./components/test/FromTest.vue";
 import MyAdmin from "@/container/admin/MyAdmin.vue";
 import MyShipper from "./container/shipper/MyShipper.vue";
+
 import MySalesman from "./container/salesman/MySalesman.vue";
+import MyProduction from "./container/salesman/MyProduction.vue";
 
 import ProfileUser from "./container/profile/ProfileUser.vue";
 import MyUsers from "./container/profile/MyUsers.vue";
@@ -94,6 +96,27 @@ const routes = [
     path: "/salesman/:id",
     name: "Salesman",
     component: MySalesman,
+    beforeEnter(to, from, next) {
+      // console.log("to", to);
+      // console.log("from", from);
+      const checkToken = handleCheckToken();
+      const checkRole = handleCheckSalesman();
+      if (checkToken) {
+        if (checkRole) {
+          next();
+        } else {
+          next("/");
+        }
+        next();
+      } else {
+        next("/login");
+      }
+    },
+  },
+  {
+    path: "/production/users/:id",
+    name: "Production",
+    component: MyProduction,
     beforeEnter(to, from, next) {
       // console.log("to", to);
       // console.log("from", from);

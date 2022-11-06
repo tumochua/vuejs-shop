@@ -1,16 +1,26 @@
 <template>
-  <input
-    class="base__input"
-    :placeholder="placeholder"
-    :disabled="isDisabled"
-    :value="value"
-    @input="onChangeValue"
-    :type="type"
-    :class="{
-      'error-border': errorInput,
-      'is-disabled': isDisabled,
-    }"
-  />
+  <div>
+    <input
+      v-if="!mutiline"
+      class="base__input"
+      :placeholder="placeholder"
+      :disabled="isDisabled"
+      :value="value"
+      @input="onChangeValue"
+      :type="type"
+      :class="{
+        'error-border': errorInput,
+        'is-disabled': isDisabled,
+      }"
+    />
+    <textarea
+      v-if="mutiline"
+      class="form-controll"
+      :placeholder="placeholder"
+      :value="value"
+      @input="onChangeValue"
+    ></textarea>
+  </div>
 </template>
 
 <script>
@@ -48,6 +58,12 @@ export default {
         return false;
       },
     },
+    mutiline: {
+      type: Boolean,
+      default() {
+        return false;
+      },
+    },
 
     // showHidlePasworld: {
     //   type: Boolean,
@@ -75,6 +91,11 @@ export default {
   border-radius: 2px;
   box-shadow: rgba 0 2px 0 (0 0 0/2%);
   width: 100%;
+  margin-top: 3px;
+  margin-bottom: 3px;
+  &:focus {
+    border: 1px solid var(--color-border-focus-visible);
+  }
 }
 .error-border {
   border: 1px solid var(--colers);
@@ -94,5 +115,21 @@ export default {
   //   width: 20px;
   //   cursor: pointer;
   // }
+}
+
+.form-controll {
+  height: 100px;
+  padding: 3px;
+  border: none;
+  outline: none;
+  border: 1px solid rgba(0, 0, 0, 0.14);
+  border-radius: 2px;
+  box-shadow: rgba 0 2px 0 (0 0 0/2%);
+  width: 100%;
+  margin-top: 3px;
+  margin-bottom: 3px;
+  &:focus {
+    border: 1px solid var(--color-border-focus-visible);
+  }
 }
 </style> 

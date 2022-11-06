@@ -56,6 +56,14 @@ const handleGetDetailUser = (userId) => {
   return api.get(`/get-user-detail-by-id?userId=${userId}`);
 };
 
+const handleCreateProduct = (data) => {
+  return api.post("/api-create-product", data);
+};
+
+const handleGetAllProduct = () => {
+  return api.get("/api-get-products");
+};
+
 export {
   getHome,
   handleApiRegister,
@@ -70,4 +78,6 @@ export {
   handleDeleteUser,
   handleApiEditUser,
   handleGetDetailUser,
+  handleCreateProduct,
+  handleGetAllProduct,
 };
